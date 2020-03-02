@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.esehiyye.R;
 
@@ -33,7 +36,25 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+toolbarTitle.setText("Parametrlər");
+        ImageButton backButton = view.findViewById(R.id.backBtn);
+        backButton.setVisibility(View.VISIBLE);
+backButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        getFragmentManager().popBackStack();
+    }
+});
+
         Button logOut =view.findViewById(R.id.logOut);
+        Button changePass =view.findViewById(R.id.changePassword);
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePasswordCLicked(view);
+            }
+        });
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,5 +82,19 @@ public class SettingsFragment extends Fragment {
         fragmentTransaction.commit();
 
     }
+
+
+    public void changePasswordCLicked(View view){
+
+
+        ChangePasswordFragment  changePasswordFragment = new ChangePasswordFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, changePasswordFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+
 
 }

@@ -34,9 +34,8 @@ android:background="@android:color/white"
 
 
 
-    Put imageView in CardView and set CornerRadius for CardView
-
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -196,7 +195,7 @@ android:id="@+id/settings"
                 />
             <Button
                 android:layout_weight="1"
-                android:onClick="immunity"
+
                 android:padding="10dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/edit_text_border"

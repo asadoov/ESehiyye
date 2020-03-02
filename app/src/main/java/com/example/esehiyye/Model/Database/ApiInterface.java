@@ -1,6 +1,7 @@
 package com.example.esehiyye.Model.Database;
 
 import com.example.esehiyye.Model.CypherStruct;
+import com.example.esehiyye.Model.StatusStruct;
 import com.example.esehiyye.Model.UserStruct;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,16 +25,18 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 
-public interface DbSelectInterface {
+public interface ApiInterface {
 
     String BASE_URL = "https://eservice.e-health.gov.az";
 
     @GET("/iosmobileapplication/user/login")
-    Call<List<CypherStruct>> getCypher(@Query("email") String email,@Query("pass") String pass);
-
+    Call<List<CypherStruct>> getSignInCypher(@Query("email") String email, @Query("pass") String pass);
+    @GET("/iosmobileapplication/user/cypher")
+    Call<List<CypherStruct>> getRefreshCypher(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2);
     @GET("/iosmobileapplication/user/userinfo")
-    Call<List<UserStruct>> getUserData(@Query("cypher1") String email,@Query("cypher2") String pass);
-
+    Call<List<UserStruct>> getUserData(@Query("cypher1") String cypher1,@Query("cypher2") String cypher2);
+    @GET("/iosmobileapplication/profil/passchange")
+    Call<List<StatusStruct>> passChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, String newPass);
 
 
 }

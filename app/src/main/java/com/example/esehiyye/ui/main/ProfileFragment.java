@@ -1,6 +1,7 @@
 package com.example.esehiyye.ui.main;
 
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.example.esehiyye.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.List;
@@ -48,12 +51,9 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        view.findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-settingsClick();
-            }
-        });
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
 
         SharedPreferences sharedPreferences
                 = view.getContext().getSharedPreferences("MySharedPref",
@@ -65,6 +65,24 @@ settingsClick();
         usrList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
 
 
+        view.findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                settingsClick(usrList);
+            }
+        });
+        view.findViewById(R.id.immunity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImmunityFragment  immunityFragment = new ImmunityFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, immunityFragment);
+                fragmentTransaction.addToBackStack(null);
+                //immunityFragment .setArguments(args);
+                fragmentTransaction.commit();
+            }
+        });
         if (usrList.get(0).STATUS!="tibbkadr"){
 
 view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
@@ -75,17 +93,23 @@ view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
 
        userName.setText(usrList.get(0).NAME);
        userDetails.setText(String.format("Boy: %s SM, Yaş: %s, Qan: %s",usrList.get(0).BOY.toString(),usrList.get(0).YASH.toString(),usrList.get(0).QAN));
-//        if (usrList.get(0).PHOTO_BASE64 != ""|| usrList.get(0).PHOTO_BASE64 != null)
-//        {
-//            byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);
-//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//            ImageView userImage =  view.findViewById(R.id.user_image);
-//           userImage.setImageBitmap(decodedByte);
-//
-//        }
+        if (usrList.get(0).PHOTO_BASE64 != null && !usrList.get(0).PHOTO_BASE64.isEmpty())
+        {
+            byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            ImageView userImage =  view.findViewById(R.id.user_image);
+           userImage.setImageBitmap(decodedByte);
+
+        }
        return view;
     }
-    public void settingsClick(){
+    public void settingsClick(List<UserStruct> userList){
+        Bundle args = new Bundle();
+
+
+
+        //args.putParcelableArrayList("u", userList);
+
 
 
         SettingsFragment  fragment = new SettingsFragment();
@@ -93,6 +117,7 @@ view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.addToBackStack(null);
+        fragment .setArguments(args);
         fragmentTransaction.commit();
 
     }
