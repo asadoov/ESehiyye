@@ -3,11 +3,19 @@ package com.example.esehiyye.Model.Database;
 import android.content.SharedPreferences;
 import android.view.View;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.esehiyye.Model.CypherStruct;
 import com.example.esehiyye.Model.UserStruct;
+import com.example.esehiyye.R;
+import com.example.esehiyye.ui.main.MainFragment;
+import com.example.esehiyye.ui.main.ProfileFragment;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -16,6 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
+
+
 
 public class DbSelect {
 
@@ -59,6 +69,9 @@ public class DbSelect {
             myEdit.putString(
                     "cypher2",
                     cypherList.get(0).cypher2);
+            myEdit.putString(
+                    "password",
+                    pass);
             myEdit.commit();
            // Toast.makeText(view.getContext(), cypherList.get(0).cypher1, Toast.LENGTH_SHORT).show();
         }
@@ -86,7 +99,7 @@ return cypherList;
                 .build();
         final ApiInterface api = retrofit.create(ApiInterface.class);
 
-        Call<List<CypherStruct>> call = api.getRefreshCypher(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null));
+        Call<List<CypherStruct>> call = api.getRefreshCypher(cypher1, cypher2);
 
         //then finallly we are making the call using enqueue()
         //it takes callback interface as an argument
@@ -99,22 +112,28 @@ return cypherList;
             cypherList  = response.body();
 
             //now we can do whatever we want with this list
-            if (!cypherList.get(0).cypher1.isEmpty()) {
+            final SharedPreferences.Editor myEdit
+                    = sharedPreferences.edit();
+
+if(cypherList.get(0).cypher!="") {
 
 
-                final SharedPreferences.Editor myEdit
-                        = sharedPreferences.edit();
 
-                myEdit.putString(
-                        "cypher1",
-                        cypherList.get(0).cypher1);
+    myEdit.putString(
+            "cypher2",
+            cypherList.get(0).cypher);
+    myEdit.commit();
+    // Toast.makeText(view.getContext(), cypherList.get(0).cypher1, Toast.LENGTH_SHORT).show();
+}
+else{
+    String jsonUserData = sharedPreferences.getString("userData", "");
+    Gson gson = new GsonBuilder().setLenient().create();
 
-                myEdit.putString(
-                        "cypher2",
-                        cypherList.get(0).cypher2);
-                myEdit.commit();
-                // Toast.makeText(view.getContext(), cypherList.get(0).cypher1, Toast.LENGTH_SHORT).show();
-            }
+ List<UserStruct>  usrList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
+signInCypher(usrList.get(0).EMAIL,sharedPreferences.getString("password", ""),view);
+    myEdit.commit();
+
+}
 
 
         }
