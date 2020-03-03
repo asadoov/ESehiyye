@@ -14,38 +14,34 @@
 
         <include layout="@layout/toolbar" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır" />
+
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/newPassLayout"
+            android:id="@+id/newEmailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
 
             <EditText
-                android:inputType="textPassword"
-                android:id="@+id/newPass"
+                android:inputType="textEmailAddress"
+                android:id="@+id/newEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Yeni şifrə" />
+                android:hint="Yeni Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/repeatNewPassLayout"
+            android:id="@+id/repeatNewEmailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
 
             <EditText
-                android:inputType="textPassword"
-                android:id="@+id/repeatNewPass"
+                android:inputType="textEmailAddress"
+                android:id="@+id/repeatNewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Yeni şifrənin təkrarı" />
+                android:hint="Yeni Email təkrarı" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -54,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/gradient"
-            android:text="Şifrəni yenilə"
+            android:text="Email yenilə"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

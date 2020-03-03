@@ -11,6 +11,7 @@ import com.example.esehiyye.Model.UserStruct;
 import com.example.esehiyye.R;
 import com.example.esehiyye.ui.main.MainFragment;
 import com.example.esehiyye.ui.main.ProfileFragment;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -53,6 +54,8 @@ public class DbSelect {
         try
         {
         Response<List<CypherStruct>> response = call.execute();
+        int aa=response.code();
+//        if (response.code()==500)
     cypherList  = response.body();
 
         //now we can do whatever we want with this list
@@ -115,7 +118,7 @@ return cypherList;
             final SharedPreferences.Editor myEdit
                     = sharedPreferences.edit();
 
-if(cypherList.get(0).cypher!="") {
+if(cypherList.size()>0) {
 
 
 
@@ -131,7 +134,7 @@ else{
 
  List<UserStruct>  usrList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
 signInCypher(usrList.get(0).EMAIL,sharedPreferences.getString("password", ""),view);
-    myEdit.commit();
+
 
 }
 

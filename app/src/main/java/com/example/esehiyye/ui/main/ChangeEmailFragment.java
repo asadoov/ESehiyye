@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.esehiyye.Model.Database.DbInsert;
-import com.example.esehiyye.Model.Database.DbSelect;
 import com.example.esehiyye.Model.StatusStruct;
-import com.example.esehiyye.Model.UserStruct;
 import com.example.esehiyye.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -31,31 +26,23 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChangePasswordFragment extends Fragment {
+public class ChangeEmailFragment extends Fragment {
 
     ProgressDialog mWaitingDialog;
     DbInsert insert = new DbInsert();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_change_password, container, false);
+       final View view = inflater.inflate(R.layout.fragment_email_change, container, false);
         TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Şifrənin redaktəsi");
+        toolbarTitle.setText("Email redaktəsi");
         ImageButton backButton = view.findViewById(R.id.backBtn);
         Button saveBtn = view.findViewById(R.id.saveChanges);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveChanges(view);
-            }
-        });
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,20 +50,27 @@ public class ChangePasswordFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveChanges(view);
+            }
+        });
         return view;
     }
 
+
     public void saveChanges(final View view) {
-        TextInputLayout passLayout = view.findViewById(R.id.newPassLayout);
-        TextInputLayout passRepeatLayout = view.findViewById(R.id.repeatNewPassLayout);
-        EditText pass = view.findViewById(R.id.newPass);
-        EditText passRepeat = view.findViewById(R.id.repeatNewPass);
-        final String passText = pass.getText().toString();
-        String passRepeatText = passRepeat.getText().toString();
+        TextInputLayout newEmailLayout = view.findViewById(R.id.newEmailLayout);
+        TextInputLayout newEmailRepeatLayout = view.findViewById(R.id.repeatNewEmailLayout);
+        EditText newEmail = view.findViewById(R.id.newEmail);
+        EditText newEmailRepeat = view.findViewById(R.id.repeatNewEmail);
+        final String newEmailText = newEmail.getText().toString();
+       final String newEmailRepeatText = newEmailRepeat.getText().toString();
 
 
-        if ((!passText.isEmpty() && passText != null) && (!passRepeatText.isEmpty() && passRepeatText != null)) {
-            if (passText.equals(passRepeatText)) {
+        if ((!newEmailText.isEmpty() && newEmailText != null) && (!newEmailRepeatText.isEmpty() && newEmailRepeatText != null)) {
+            if (newEmailText.equals(newEmailRepeatText)) {
 //                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 //                (?=.*[0-9]) a digit must occur at least once
 //                (?=.*[a-z]) a lower case letter must occur at least once
@@ -84,9 +78,9 @@ public class ChangePasswordFragment extends Fragment {
 //                (?=.*[@#$%^&+=]) a special character must occur at least once
 //                (?=\\S+$) no whitespace allowed in the entire string
 //                .{8,} at least 8 characters
-                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
+                String pattern = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
-                if (passText.matches(pattern)) {
+                if (newEmailText.matches(pattern)) {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             mWaitingDialog = ProgressDialog.show(getContext(), "", "Yüklənir. Gözləyin...", true);
@@ -105,7 +99,7 @@ public class ChangePasswordFragment extends Fragment {
                             SharedPreferences sharedPreferences
                                     = getContext().getSharedPreferences("MySharedPref",
                                     MODE_PRIVATE);
-                            final List<StatusStruct> status = insert.changePassword(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), passText, view);
+                            final List<StatusStruct> status = insert.changeEmail(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), newEmailText, view);
 
 
                             getActivity().runOnUiThread(new Runnable() {
@@ -114,10 +108,10 @@ public class ChangePasswordFragment extends Fragment {
                                     if (status.size() > 0) {
 
                                         alertDialog.setTitle("Bildiriş");
-                                        alertDialog.setMessage("Şifrəniz uğurla dəyişdrildi");
+                                        alertDialog.setMessage("Emailınz uğurla dəyişdrildi");
                                     } else {
                                         alertDialog.setTitle("Xəta");
-                                        alertDialog.setMessage("Təəsüfki şifrənizi dəyişmək mümkün olmadı biraz sonra yenidən cəht edin");
+                                        alertDialog.setMessage("Təəssüfki Emailınızı dəyişmək mümkün olmadı, biraz sonra yenidən cəht edin");
 
 
                                     }
@@ -133,20 +127,20 @@ public class ChangePasswordFragment extends Fragment {
 
                     signInCall.start();
                 } else {
-                    passLayout.setError("*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır");
-                  //  passRepeatLayout.setError("*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır");
+                    newEmailLayout.setError("*Emailınızı düzgün daxil edin");
+                    //  newEmailRepeatLayout.setError("*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır");
 
                 }
 
             } else {
-              //  passLayout.setError("Şifrə eyni olmalidir");
-                passRepeatLayout.setError("Şifrə eyni olmalidir");
+                //  newEmailLayout.setError("Şifrə eyni olmalidir");
+                newEmailRepeatLayout.setError("*Email eyni olmalidir");
             }
         } else {
 
 
-            passLayout.setError("Zəhmət olmasa boşluğu doldurun");
-            passRepeatLayout.setError("Zəhmət olmasa boşluğu doldurun");
+            newEmailLayout.setError("*Zəhmət olmasa boşluğu doldurun");
+            newEmailRepeatLayout.setError("*Zəhmət olmasa boşluğu doldurun");
 
         }
 

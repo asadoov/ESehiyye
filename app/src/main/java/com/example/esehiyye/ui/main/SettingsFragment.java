@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.esehiyye.R;
 
@@ -37,18 +36,20 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_settings, container, false);
         TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
-toolbarTitle.setText("Parametrlər");
+        toolbarTitle.setText("Parametrlər");
         ImageButton backButton = view.findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
-backButton.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        getFragmentManager().popBackStack();
-    }
-});
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
-        Button logOut =view.findViewById(R.id.logOut);
-        Button changePass =view.findViewById(R.id.changePassword);
+        Button logOut = view.findViewById(R.id.logOut);
+        Button changeEmail = view.findViewById(R.id.changeMail);
+        Button changePass = view.findViewById(R.id.changePassword);
+        Button changePhone = view.findViewById(R.id.changeMobile);
         changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +62,23 @@ backButton.setOnClickListener(new View.OnClickListener() {
                 logOutClicked(view);
             }
         });
+        changeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeEmailCLicked(view);
+            }
+        });
+        changePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePhoneCLicked(view);
+            }
+        });
         return view;
     }
 
 
-    public void logOutClicked(View view){
+    public void logOutClicked(View view) {
         final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
         final SharedPreferences.Editor myEdit
@@ -74,7 +87,7 @@ backButton.setOnClickListener(new View.OnClickListener() {
                 "userData",
                 null);
         myEdit.commit();
-        MainFragment  signInFragment = new MainFragment();
+        MainFragment signInFragment = new MainFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, signInFragment);
@@ -84,10 +97,10 @@ backButton.setOnClickListener(new View.OnClickListener() {
     }
 
 
-    public void changePasswordCLicked(View view){
+    public void changePasswordCLicked(View view) {
 
 
-        ChangePasswordFragment  changePasswordFragment = new ChangePasswordFragment();
+        ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, changePasswordFragment);
@@ -96,5 +109,27 @@ backButton.setOnClickListener(new View.OnClickListener() {
 
     }
 
+    public void changeEmailCLicked(View view) {
 
+
+        ChangeEmailFragment changeEmailFragment = new ChangeEmailFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, changeEmailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+
+    public void changePhoneCLicked(View view) {
+
+
+        ChangePhoneFragment changePhoneFragment = new ChangePhoneFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, changePhoneFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
 }

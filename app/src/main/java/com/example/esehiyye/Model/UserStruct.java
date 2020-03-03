@@ -1,6 +1,7 @@
 package com.example.esehiyye.Model;
 
-public class UserStruct {
+public class UserStruct{
+
 
 
     public Integer ID ;

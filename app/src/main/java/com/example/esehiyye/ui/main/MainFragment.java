@@ -26,8 +26,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MainFragment extends Fragment {
 
-DbSelect select = new DbSelect();
+    DbSelect select = new DbSelect();
     ProgressDialog mWaitingDialog;
+
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -42,9 +43,9 @@ DbSelect select = new DbSelect();
         final EditText pass = view.findViewById(R.id.password);
         final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
-        if (sharedPreferences.getString("userData", null)!=null){
+        if (sharedPreferences.getString("userData", null) != null) {
 
-            ProfileFragment  fragment2 = new ProfileFragment();
+            ProfileFragment fragment2 = new ProfileFragment();
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, fragment2);
@@ -55,23 +56,18 @@ DbSelect select = new DbSelect();
         }
 
 
-
         view.findViewById(R.id.signInClick).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-signIn(email.getText().toString(),pass.getText().toString(),view);
+                signIn(email.getText().toString(), pass.getText().toString(), view);
             }
         });
-        return  view;
+        return view;
     }
 
 
-
-
-
-
-    public void signIn(final String email,final String pass,final View view){
+    public void signIn(final String email, final String pass, final View view) {
 
 
 // when you start loading the data
@@ -81,40 +77,39 @@ signIn(email.getText().toString(),pass.getText().toString(),view);
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 mWaitingDialog = ProgressDialog.show(getContext(), "", "Yüklənir. Gözləyin...", true);
-            }});
+            }
+        });
         final EditText emailEdit = view.findViewById(R.id.email);
         final EditText passEdit = view.findViewById(R.id.password);
-            Thread signInCall = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                   final List<UserStruct> userList = select.signIn(email,pass,view);
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            if (userList.size()>0) {
-                                ProfileFragment fragment2 = new ProfileFragment();
-                                FragmentManager fragmentManager = getFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.container, fragment2);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+        Thread signInCall = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final List<UserStruct> userList = select.signIn(email, pass, view);
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        mWaitingDialog.dismiss();
+                        if (userList.size() > 0) {
+                            ProfileFragment fragment2 = new ProfileFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container, fragment2);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
 
-                            }
-                            else {
+                        } else {
 
-                               emailEdit.setError("Zəhmət olmasa Email-zın düzgünlüyünü yoxlayın");
-                                passEdit.setError("Zəhmət olmasa şifrəninzin düzgünlüyünü yoxlayın");
-                            }
-                            mWaitingDialog.dismiss();
+                            emailEdit.setError("*Zəhmət olmasa Emailınızın düzgünlüyünü yoxlayın");
+                            passEdit.setError("*Zəhmət olmasa şifrəninzin düzgünlüyünü yoxlayın");
                         }
-                    });
+
+                    }
+                });
 
 
+            }
+        });
 
-
-                }
-            });
-
-            signInCall.start();
+        signInCall.start();
 //try {
 //
 //    signInCall.join();
@@ -122,7 +117,6 @@ signIn(email.getText().toString(),pass.getText().toString(),view);
 //catch (Exception ex){
 //    ex.printStackTrace();
 //}
-
 
 
     }

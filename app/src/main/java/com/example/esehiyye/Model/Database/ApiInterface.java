@@ -37,7 +37,10 @@ public interface ApiInterface {
     Call<List<UserStruct>> getUserData(@Query("cypher1") String cypher1,@Query("cypher2") String cypher2);
     @GET("/iosmobileapplication/profil/passchange")
     Call<List<StatusStruct>> passChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("newpass") String newPass);
-
+    @GET("/iosmobileapplication/profil/emailchange")
+    Call<List<StatusStruct>> mailChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("newmail") String newmail);
+    @GET("/iosmobileapplication/profil/mobilechange")
+    Call<List<StatusStruct>> phoneChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("newmobile") String newmobile);
 
 }
 

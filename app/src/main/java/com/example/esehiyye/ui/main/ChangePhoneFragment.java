@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.esehiyye.Model.Database.DbInsert;
-import com.example.esehiyye.Model.Database.DbSelect;
 import com.example.esehiyye.Model.StatusStruct;
-import com.example.esehiyye.Model.UserStruct;
 import com.example.esehiyye.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -31,11 +26,10 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChangePasswordFragment extends Fragment {
+public class ChangePhoneFragment extends Fragment {
 
     ProgressDialog mWaitingDialog;
     DbInsert insert = new DbInsert();
@@ -45,17 +39,11 @@ public class ChangePasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_change_password, container, false);
+        final View view = inflater.inflate(R.layout.fragment_change_phone, container, false);
         TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Şifrənin redaktəsi");
+        toolbarTitle.setText("Mobil nömrənin redaktəsi");
         ImageButton backButton = view.findViewById(R.id.backBtn);
         Button saveBtn = view.findViewById(R.id.saveChanges);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveChanges(view);
-            }
-        });
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,20 +51,26 @@ public class ChangePasswordFragment extends Fragment {
                 getFragmentManager().popBackStack();
             }
         });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveChanges(view);
+            }
+        });
         return view;
     }
 
     public void saveChanges(final View view) {
-        TextInputLayout passLayout = view.findViewById(R.id.newPassLayout);
-        TextInputLayout passRepeatLayout = view.findViewById(R.id.repeatNewPassLayout);
-        EditText pass = view.findViewById(R.id.newPass);
-        EditText passRepeat = view.findViewById(R.id.repeatNewPass);
-        final String passText = pass.getText().toString();
-        String passRepeatText = passRepeat.getText().toString();
+        TextInputLayout newPhoneLayout = view.findViewById(R.id.newPhoneLayout);
+        TextInputLayout newPhoneRepeatLayout = view.findViewById(R.id.repeatNewPhoneLayout);
+        EditText newPhone = view.findViewById(R.id.newPhone);
+        EditText newPhoneRepeat = view.findViewById(R.id.repeatNewPhone);
+        final String newPhoneText = newPhone.getText().toString();
+        final String newPhoneRepeatText = newPhoneRepeat.getText().toString();
 
 
-        if ((!passText.isEmpty() && passText != null) && (!passRepeatText.isEmpty() && passRepeatText != null)) {
-            if (passText.equals(passRepeatText)) {
+        if ((!newPhoneText.isEmpty() && newPhoneText != null) && (!newPhoneRepeatText.isEmpty() && newPhoneRepeatText != null)) {
+            if (newPhoneText.equals(newPhoneRepeatText)) {
 //                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
 //                (?=.*[0-9]) a digit must occur at least once
 //                (?=.*[a-z]) a lower case letter must occur at least once
@@ -84,9 +78,7 @@ public class ChangePasswordFragment extends Fragment {
 //                (?=.*[@#$%^&+=]) a special character must occur at least once
 //                (?=\\S+$) no whitespace allowed in the entire string
 //                .{8,} at least 8 characters
-                String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
 
-                if (passText.matches(pattern)) {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             mWaitingDialog = ProgressDialog.show(getContext(), "", "Yüklənir. Gözləyin...", true);
@@ -105,7 +97,7 @@ public class ChangePasswordFragment extends Fragment {
                             SharedPreferences sharedPreferences
                                     = getContext().getSharedPreferences("MySharedPref",
                                     MODE_PRIVATE);
-                            final List<StatusStruct> status = insert.changePassword(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), passText, view);
+                            final List<StatusStruct> status = insert.changePhone(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), newPhoneText, view);
 
 
                             getActivity().runOnUiThread(new Runnable() {
@@ -114,10 +106,10 @@ public class ChangePasswordFragment extends Fragment {
                                     if (status.size() > 0) {
 
                                         alertDialog.setTitle("Bildiriş");
-                                        alertDialog.setMessage("Şifrəniz uğurla dəyişdrildi");
+                                        alertDialog.setMessage("Nömrəniz uğurla dəyişdrildi");
                                     } else {
                                         alertDialog.setTitle("Xəta");
-                                        alertDialog.setMessage("Təəsüfki şifrənizi dəyişmək mümkün olmadı biraz sonra yenidən cəht edin");
+                                        alertDialog.setMessage("Təəsüfki nömrənizi dəyişmək mümkün olmadı, biraz sonra yenidən cəht edin");
 
 
                                     }
@@ -132,21 +124,17 @@ public class ChangePasswordFragment extends Fragment {
                     });
 
                     signInCall.start();
-                } else {
-                    passLayout.setError("*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır");
-                  //  passRepeatLayout.setError("*Yeni şifrə minimum 8 simvol, 1 böyük, 1 kiçik hərfdən və minimum 1 rəqəm dən ibarət olmalıdır");
 
-                }
 
             } else {
-              //  passLayout.setError("Şifrə eyni olmalidir");
-                passRepeatLayout.setError("Şifrə eyni olmalidir");
+                //  newPhoneLayout.setError("Şifrə eyni olmalidir");
+                newPhoneRepeatLayout.setError("Nömrələr eyni olmalidir");
             }
         } else {
 
 
-            passLayout.setError("Zəhmət olmasa boşluğu doldurun");
-            passRepeatLayout.setError("Zəhmət olmasa boşluğu doldurun");
+            newPhoneLayout.setError("Zəhmət olmasa boşluğu doldurun");
+            newPhoneRepeatLayout.setError("Zəhmət olmasa boşluğu doldurun");
 
         }
 
