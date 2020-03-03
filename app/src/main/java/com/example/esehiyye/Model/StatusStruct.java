@@ -1,5 +1,5 @@
 package com.example.esehiyye.Model;
 
 public class StatusStruct {
-    String Ok;
+   public String OK;
 }
