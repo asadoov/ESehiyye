@@ -3,15 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
-    <item
-
-        android:id="@+id/feedback"
-        android:enabled="true"
-        android:icon="@drawable/feedback"
-        android:title="Əks əlaqə"
-        app:showAsAction="ifRoom"
-        />
     <item
         android:id="@+id/profile"
 
@@ -20,10 +11,26 @@
         android:title="Profil"
         app:showAsAction="ifRoom"/>
     <item
+
+        android:id="@+id/feedback"
+        android:enabled="true"
+        android:icon="@drawable/feedback"
+        android:title="Əks əlaqə"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
         android:id="@+id/news"
         android:enabled="true"
         android:icon="@drawable/news"
         android:title="Xəbərlər"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:iconTint="@android:color/black"
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="Parametrlər"
         app:showAsAction="ifRoom"/>
 
 </menu>

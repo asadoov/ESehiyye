@@ -6,9 +6,44 @@
     tools:context=".ui.main.FeedbackFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar" />
+
+        <EditText
+
+            android:id="@+id/feedbackTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+
+            android:gravity="start"
+            android:hint="Müraciətinizi daxil edin..."
+            android:inputType="text"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/sendFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+
+            android:background="@drawable/blue_gradient"
+            android:text="Göndər"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
 
 </FrameLayout>

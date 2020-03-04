@@ -63,6 +63,30 @@ public class MainFragment extends Fragment {
                 signIn(email.getText().toString(), pass.getText().toString(), view);
             }
         });
+        view.findViewById(R.id.signUpclick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SignUpFragment fragment2 = new SignUpFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+        view.findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PasswordRecoveryFragment fragment2 = new PasswordRecoveryFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return view;
     }
 

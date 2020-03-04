@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.esehiyye.R;
@@ -37,14 +36,7 @@ public class SettingsFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_settings, container, false);
         TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Parametrlər");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
-        backButton.setVisibility(View.VISIBLE);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().popBackStack();
-            }
-        });
+
 
         Button logOut = view.findViewById(R.id.logOut);
         Button changeEmail = view.findViewById(R.id.changeMail);
@@ -103,7 +95,7 @@ public class SettingsFragment extends Fragment {
         ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, changePasswordFragment);
+        fragmentTransaction.replace(R.id.appContainer, changePasswordFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -115,7 +107,7 @@ public class SettingsFragment extends Fragment {
         ChangeEmailFragment changeEmailFragment = new ChangeEmailFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, changeEmailFragment);
+        fragmentTransaction.replace(R.id.appContainer, changeEmailFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -127,7 +119,7 @@ public class SettingsFragment extends Fragment {
         ChangePhoneFragment changePhoneFragment = new ChangePhoneFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, changePhoneFragment);
+        fragmentTransaction.replace(R.id.appContainer, changePhoneFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 

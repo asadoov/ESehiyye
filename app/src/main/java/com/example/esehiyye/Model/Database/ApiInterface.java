@@ -1,22 +1,11 @@
 package com.example.esehiyye.Model.Database;
 
 import com.example.esehiyye.Model.CypherStruct;
+import com.example.esehiyye.Model.DrugsStruct;
+import com.example.esehiyye.Model.FeedbackStatusStruct;
+import com.example.esehiyye.Model.NewsStruct;
 import com.example.esehiyye.Model.StatusStruct;
 import com.example.esehiyye.Model.UserStruct;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import org.json.JSONException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import java.util.List;
 
@@ -41,6 +30,15 @@ public interface ApiInterface {
     Call<List<StatusStruct>> mailChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("newmail") String newmail);
     @GET("/iosmobileapplication/profil/mobilechange")
     Call<List<StatusStruct>> phoneChange(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("newmobile") String newmobile);
+    @GET("/iosmobileapplication/news/newslist")
+    Call<List<NewsStruct>> getNews(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2);
+    @GET("/iosmobileapplication/qeydiyyatsizxidmetler/dermanvasiteleri")
+    Call<List<DrugsStruct>> getDrugs(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2);
+    @GET("/iosmobileapplication/feedback/insert")
+    Call<List<FeedbackStatusStruct>> sendFeedback(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2,@Query("text") String text);
+
+
+
 
 }
 

@@ -3,33 +3,28 @@ package com.example.esehiyye.ui.main;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.esehiyye.Model.UserStruct;
 import com.example.esehiyye.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.List;
-import android.util.Base64;
-import java.util.Base64.Decoder;
-import java.util.Base64.Encoder;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -37,7 +32,6 @@ import static android.content.Context.MODE_PRIVATE;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
-
 
     List<UserStruct> usrList;
 
@@ -51,10 +45,18 @@ public class ProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+      final FragmentManager fragmentManager = getFragmentManager();
+
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-
+        ServicesFragment  servicesFragment = new ServicesFragment();
+        Fragment selectedFragment = null;
+        FragmentTransaction serviceTransaction = fragmentManager.beginTransaction();
+        serviceTransaction.replace(R.id.appContainer, servicesFragment);
+        serviceTransaction.addToBackStack(null);
+        //immunityFragment .setArguments(args);
+        serviceTransaction.commit();
         SharedPreferences sharedPreferences
                 = view.getContext().getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
@@ -64,43 +66,58 @@ public class ProfileFragment extends Fragment {
 
         usrList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
 
+        BottomNavigationView bottomNavigationView =  view.findViewById(R.id.bottom_navigation);
+      bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        switch (item.getItemId()) {
 
-        view.findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                settingsClick(usrList);
-            }
-        });
-        view.findViewById(R.id.immunity).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImmunityFragment  immunityFragment = new ImmunityFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, immunityFragment);
-                fragmentTransaction.addToBackStack(null);
-                //immunityFragment .setArguments(args);
-                fragmentTransaction.commit();
-            }
-        });
-        if (usrList.get(0).STATUS!="tibbkadr"){
+                            case R.id.settings:
+                                SettingsFragment  settingsFragment = new SettingsFragment();
 
-view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
 
-        }
-       TextView userName = view.findViewById(R.id.user_name);
-       TextView userDetails = view.findViewById(R.id.user_details);
+                                fragmentTransaction.replace(R.id.appContainer, settingsFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                //immunityFragment .setArguments(args);
 
-       userName.setText(usrList.get(0).NAME);
-       userDetails.setText(String.format("Boy: %s SM, Yaş: %s, Qan: %s",usrList.get(0).BOY.toString(),usrList.get(0).YASH.toString(),usrList.get(0).QAN));
-        if (usrList.get(0).PHOTO_BASE64 != null && !usrList.get(0).PHOTO_BASE64.isEmpty())
-        {
-            byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            ImageView userImage =  view.findViewById(R.id.user_image);
-           userImage.setImageBitmap(decodedByte);
+                                break;
 
-        }
+                            case R.id.news:
+                                NewsFragment  newsFragment = new NewsFragment();
+                                fragmentTransaction.replace(R.id.appContainer, newsFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                //immunityFragment .setArguments(args);
+
+                                break;
+
+                            case R.id.profile:
+                                ServicesFragment  servicesFragment = new ServicesFragment();
+                                fragmentTransaction.replace(R.id.appContainer, servicesFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                //immunityFragment .setArguments(args);
+
+                                break;
+
+
+                            case R.id.feedback:
+                                FeedbackFragment  feedBackFragment = new FeedbackFragment();
+                                fragmentTransaction.replace(R.id.appContainer, feedBackFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                //immunityFragment .setArguments(args);
+
+                                break;
+
+                        }
+
+                        fragmentTransaction.commit();
+
+                        return true;
+                    }
+                });
+
+
        return view;
     }
     public void settingsClick(List<UserStruct> userList){

@@ -3,7 +3,7 @@ package com.example.esehiyye.Model.Database;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import com.example.esehiyye.Model.CypherStruct;
+import com.example.esehiyye.Model.FeedbackStatusStruct;
 import com.example.esehiyye.Model.StatusStruct;
 import com.example.esehiyye.Model.UserStruct;
 import com.google.gson.Gson;
@@ -164,6 +164,44 @@ public class DbInsert {
                 myEdit.commit();
 
             }
+
+            select.refreshCypher(cypher1, cypher2, view);
+
+
+            return statusList;
+
+
+        } catch (Exception ex) {
+
+            return statusList;
+
+        }
+
+
+    }
+    public List<FeedbackStatusStruct> sendFeedback(String cypher1, String cypher2, String text, final View view) {
+        List<FeedbackStatusStruct> statusList = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<FeedbackStatusStruct>> getUserData = api.sendFeedback(cypher1, cypher2, text);
+            Response<List<FeedbackStatusStruct>> response = getUserData.execute();
+            statusList = response.body();
+
+
 
             select.refreshCypher(cypher1, cypher2, view);
 

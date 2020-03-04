@@ -6,9 +6,26 @@
     tools:context=".ui.main.DrugsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/toolbar"/>
+        <SearchView
+            android:id="@+id/drugsSearch"
+            android:queryHint="Dərmanın adı..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ListView
+            android:padding="10dp"
+            android:id="@+id/drugsListView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
 
 </FrameLayout>

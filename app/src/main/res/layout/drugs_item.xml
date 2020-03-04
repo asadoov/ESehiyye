@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p1="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <ImageView
+        android:paddingTop="10dp"
+        android:layerType="software"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/warning_ico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/drugIco" />
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:weightSum="2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:text="Title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+
+            android:layout_width="wrap_content"
+            android:id="@+id/drugTitle"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:maxEms="100"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Decription"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+
+            android:layout_width="match_parent"
+            android:id="@+id/drugDescription"
+            android:layout_height="match_parent"
+            android:textStyle="normal"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

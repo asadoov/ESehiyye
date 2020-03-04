@@ -3,15 +3,10 @@ package com.example.esehiyye.Model.Database;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.example.esehiyye.Model.CypherStruct;
+import com.example.esehiyye.Model.DrugsStruct;
+import com.example.esehiyye.Model.NewsStruct;
 import com.example.esehiyye.Model.UserStruct;
-import com.example.esehiyye.R;
-import com.example.esehiyye.ui.main.MainFragment;
-import com.example.esehiyye.ui.main.ProfileFragment;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -216,6 +211,83 @@ catch (Exception ex){
     return  userList;
 
 }
+
+
+    }
+
+
+
+    public List<NewsStruct> getNews(String cypher1, String cypher2, final View view) {
+        List<NewsStruct> newsList = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<NewsStruct>> getUserData = api.getNews(cypher1, cypher2);
+            Response<List<NewsStruct>> response = getUserData.execute();
+            newsList = response.body();
+
+
+            refreshCypher(cypher1, cypher2, view);
+
+
+            return newsList;
+
+
+        } catch (Exception ex) {
+
+            return newsList;
+
+        }
+
+
+    }
+    public List<DrugsStruct> getDrugs(String cypher1, String cypher2, final View view) {
+        List<DrugsStruct> list = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<DrugsStruct>> getUserData = api.getDrugs(cypher1, cypher2);
+            Response<List<DrugsStruct>> response = getUserData.execute();
+            list = response.body();
+
+
+            refreshCypher(cypher1, cypher2, view);
+
+
+            return list;
+
+
+        } catch (Exception ex) {
+
+            return list;
+
+        }
 
 
     }
