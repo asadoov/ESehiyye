@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".ui.main.MainFragment">
+    tools:context="az.gov.e_health.esehiyye.ui.main.MainFragment">
 <!--    <ImageView-->
 
 <!--        android:src="@drawable/es_logo"-->

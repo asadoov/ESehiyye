@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.esehiyye">
+    package="az.gov.e_health.esehiyye">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/es_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.esehiyye.MainActivity">
+        <activity android:name="az.gov.e_health.esehiyye.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
