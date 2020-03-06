@@ -79,7 +79,7 @@ android:layout_margin="10dp"
         android:id="@+id/signInClick"
         android:text="Daxil ol"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
 />
         <LinearLayout
             android:gravity="right"
@@ -98,9 +98,10 @@ android:layout_margin="10dp"
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:gravity="bottom"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <Button
         android:layout_margin="10dp"
         android:textColor="@android:color/white"
