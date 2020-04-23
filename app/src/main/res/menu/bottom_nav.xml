@@ -7,8 +7,8 @@
         android:id="@+id/profile"
 
         android:enabled="true"
-        android:icon="@drawable/customer"
-        android:title="Profil"
+        android:icon="@drawable/options_ico"
+        android:title="Xidmətlər"
         app:showAsAction="ifRoom"/>
     <item
 
@@ -29,8 +29,8 @@
         android:iconTint="@android:color/black"
         android:id="@+id/settings"
         android:enabled="true"
-        android:icon="@drawable/settings"
-        android:title="Parametrlər"
+        android:icon="@drawable/ic_menu"
+        android:title="Menyu"
         app:showAsAction="ifRoom"/>
 
 </menu>

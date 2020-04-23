@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="az.gov.e_health.esehiyye.ui.main.DrugsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,6 +16,7 @@
         <include
             layout="@layout/toolbar"/>
         <SearchView
+           android:iconifiedByDefault="false"
             android:id="@+id/drugsSearch"
             android:queryHint="Dərmanın adı..."
             android:layout_width="match_parent"
