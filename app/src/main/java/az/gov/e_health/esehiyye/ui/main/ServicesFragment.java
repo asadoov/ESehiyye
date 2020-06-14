@@ -4,8 +4,11 @@ package az.gov.e_health.esehiyye.ui.main;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,6 +24,7 @@ import az.gov.e_health.esehiyye.Model.UserStruct;
 
 import az.gov.e_health.esehiyye.R;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -43,6 +47,8 @@ public class ServicesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_services, container, false);
+           TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+     toolbarTitle.setText("Elektron xidmətlər");
         final FragmentManager fragmentManager = getFragmentManager();
 
         SharedPreferences sharedPreferences
@@ -83,11 +89,9 @@ public class ServicesFragment extends Fragment {
             view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
 
         }
-        TextView userName = view.findViewById(R.id.user_name);
-        TextView userDetails = view.findViewById(R.id.user_details);
 
-        userName.setText(usrList.get(0).NAME);
-        userDetails.setText(String.format("Boy: %s SM, Yaş: %s, Qan: %s",usrList.get(0).BOY.toString(),usrList.get(0).YASH.toString(),usrList.get(0).QAN));
+
+
         if (usrList.get(0).PHOTO_BASE64 != null && !usrList.get(0).PHOTO_BASE64.isEmpty())
         {
             byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);

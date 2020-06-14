@@ -12,88 +12,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout android:id="@+id/appbar"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:fitsSystemWindows="true">
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:fitsSystemWindows="true"
-                app:contentScrim="@drawable/navbar_header"
-                android:background="@drawable/navbar_header"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleMarginEnd="64dp">
-
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_marginTop="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:cardCornerRadius="60dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:src="@drawable/user"
-                            android:id="@+id/user_image"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="fitXY" />
-
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-
-                        android:text="Large Text"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:gravity="center_horizontal"
-                        android:layout_width="match_parent"
-
-                        android:id="@+id/user_name"
-                        android:background="@android:color/transparent"
-                        android:layout_height="match_parent"
-
-
-
-                        />
-                    <TextView
-
-                        android:text="Large Text"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:gravity="center_horizontal"
-                        android:id="@+id/user_details"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:background="@android:color/transparent"/>
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:layout_collapseMode="pin"
-                    >
-
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
+   <include layout="@layout/toolbar" />
         <FrameLayout
             android:id="@+id/progressBarHolder"
             android:animateLayoutChanges="true"
@@ -128,78 +47,120 @@
                 android:layout_height="match_parent">
                 <LinearLayout
                     android:id="@+id/onlyForDoctors"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:weightSum="2"
+
                     >
-                    <Button
-                        android:layout_weight="1"
+
+                    <RelativeLayout
+
+                        android:background="@drawable/edit_text_border"
+                        android:padding="10dp"
+                        android:layout_margin="10dp"
                         android:id="@+id/snsk"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@drawable/award"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="SNSK"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+
+                        android:background="@drawable/edit_text_border"
                         android:padding="10dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:drawableTop="@drawable/award"
-                        p1:text="SNSK"
-
-
-                        android:layout_height="wrap_content"
-
-                        android:layout_width="0dp"
-
-
-                        />
-                    <Button
-                        android:layout_weight="1"
                         android:id="@+id/dtt"
-                        android:padding="10dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:drawableTop="@drawable/diploma"
-                        p1:text="Davamlı tibbi təhsil"
-                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@drawable/diploma"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
 
-                        android:layout_width="0dp"
+                        <TextView
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="Davamlı tibbi təhsil"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
 
 
-                        />
+                    </RelativeLayout>
+
                 </LinearLayout>
                 <LinearLayout
 
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="2"
                     >
-                    <Button
-                        android:layout_weight="1"
-                        android:onClick="drugs"
+                    <RelativeLayout
+
+                        android:background="@drawable/edit_text_border"
+                        android:padding="10dp"
+                        android:layout_margin="10dp"
                         android:id="@+id/drugs"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@drawable/drug"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="Dərman vasitələri haqqında məlumat"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+
+                        android:background="@drawable/edit_text_border"
                         android:padding="10dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:drawableTop="@drawable/drug"
-                        p1:text="Dərman vasitələri haqqında məlumat"
+                        android:id="@+id/immunity"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@drawable/vaccine"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
 
-                        android:layout_height="wrap_content"
+                        <TextView
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="İmmunoprofilaktika üzrə məlumat"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
 
-                        android:layout_width="0dp"
 
-                        />
-                    <Button
-                        android:layout_weight="1"
+                    </RelativeLayout>
 
-                        android:padding="10dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:drawableTop="@drawable/vaccine"
-                        p1:text="İmmunoprofilaktika üzrə məlumat"
-                        p1:id="@+id/immunity"
-                        android:layout_height="wrap_content"
 
-                        android:layout_width="0dp"
 
-                        />
+
+
+
+
                 </LinearLayout>
                 <!-- <Button
 
