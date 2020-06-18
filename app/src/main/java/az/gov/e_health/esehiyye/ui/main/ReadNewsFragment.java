@@ -29,10 +29,10 @@ public class ReadNewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_read_news, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
 
-        ImageButton backButton = view.findViewById(R.id.backBtn);
-        Button saveBtn = view.findViewById(R.id.saveChanges);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
+        Button saveBtn = getActivity().findViewById(R.id.saveChanges);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

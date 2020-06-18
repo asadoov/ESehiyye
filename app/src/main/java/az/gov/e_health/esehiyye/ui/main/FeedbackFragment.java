@@ -47,7 +47,7 @@ public class FeedbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Əks əlaqə");
         final Button sendFeedback = view.findViewById(R.id.sendFeedback);
         sendFeedback.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package az.gov.e_health.esehiyye.ui.main;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -39,7 +40,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.main_fragment, container, false);
-
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.GONE);
         final EditText email = view.findViewById(R.id.email);
         final EditText pass = view.findViewById(R.id.password);
         final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",

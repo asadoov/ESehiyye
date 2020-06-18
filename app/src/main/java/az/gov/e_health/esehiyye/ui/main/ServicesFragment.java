@@ -2,29 +2,23 @@ package az.gov.e_health.esehiyye.ui.main;
 
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import az.gov.e_health.esehiyye.Model.UserStruct;
 
 import az.gov.e_health.esehiyye.R;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -47,7 +41,11 @@ public class ServicesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_services, container, false);
-           TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+           TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
+        backButton.setVisibility(View.GONE);
      toolbarTitle.setText("Elektron xidmətlər");
         final FragmentManager fragmentManager = getFragmentManager();
 
@@ -84,22 +82,40 @@ public class ServicesFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        if (usrList.get(0).STATUS!="tibbkadr"){
+        view.findViewById(R.id.dtt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DttYearsFragment fragment = new DttYearsFragment();
 
-            view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
-
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                //fragment .setArguments(args);
+                fragmentTransaction.commit();
+            }
+        });
+        //Toast.makeText(getContext(), usrList.get(0).STATUS, Toast.LENGTH_SHORT).show();
+        switch (usrList.get(0).STATUS) {
+            case "tibbkadr":
+                view.findViewById(R.id.onlyForDoctors).setVisibility(View.VISIBLE);
+                break;
+            default:
+                view.findViewById(R.id.onlyForDoctors).setVisibility(View.GONE);
+                break;
         }
 
 
 
-        if (usrList.get(0).PHOTO_BASE64 != null && !usrList.get(0).PHOTO_BASE64.isEmpty())
-        {
-            byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            ImageView userImage =  view.findViewById(R.id.user_image);
-            userImage.setImageBitmap(decodedByte);
 
-        }
+
+//        if (usrList.get(0).PHOTO_BASE64 != null && !usrList.get(0).PHOTO_BASE64.isEmpty())
+//        {
+//            byte[] decodedString = Base64.decode(usrList.get(0).PHOTO_BASE64, Base64.DEFAULT);
+//            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//            ImageView userImage =  view.findViewById(R.id.user_image);
+//            userImage.setImageBitmap(decodedByte);
+//
+//        }
         return  view;
     }
 

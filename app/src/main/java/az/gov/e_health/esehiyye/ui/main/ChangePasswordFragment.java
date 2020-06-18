@@ -43,9 +43,9 @@ public class ChangePasswordFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_change_password, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Şifrənin redaktəsi");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         Button saveBtn = view.findViewById(R.id.saveChanges);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -41,9 +41,9 @@ public class ChangeEmailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        final View view = inflater.inflate(R.layout.fragment_email_change, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Email redaktəsi");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         Button saveBtn = view.findViewById(R.id.saveChanges);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -46,7 +47,8 @@ public class ProfileFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+      Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+      toolbar.setVisibility(View.GONE);
       final FragmentManager fragmentManager = getFragmentManager();
 
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);

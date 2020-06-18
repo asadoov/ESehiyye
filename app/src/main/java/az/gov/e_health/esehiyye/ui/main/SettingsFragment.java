@@ -50,7 +50,8 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.GONE);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 

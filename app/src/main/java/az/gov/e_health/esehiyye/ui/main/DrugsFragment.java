@@ -56,15 +56,17 @@ public class DrugsFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Dərman vasitələri haqqında məlumat");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         Button saveBtn = view.findViewById(R.id.saveChanges);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getFragmentManager().popBackStack();
+                backButton.setVisibility(View.GONE);
             }
         });
         SearchView searchView = view.findViewById(R.id.drugsSearch);

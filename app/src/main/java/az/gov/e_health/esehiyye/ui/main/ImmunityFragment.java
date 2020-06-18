@@ -38,14 +38,15 @@ public class ImmunityFragment extends Fragment {
 View view = inflater.inflate(R.layout.fragment_immunity, container, false);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getContext(),R.id.immunityList,immunityItems);
 
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("İmmunoprofilatika üzrə məlumat");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
+                backButton.setVisibility(View.GONE);
             }
         });
 

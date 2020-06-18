@@ -4,6 +4,7 @@ package az.gov.e_health.esehiyye.ui.main;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -28,9 +29,11 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Qeydiyyat");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

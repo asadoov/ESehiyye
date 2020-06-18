@@ -5,6 +5,7 @@ import android.view.View;
 
 import az.gov.e_health.esehiyye.Model.CypherStruct;
 import az.gov.e_health.esehiyye.Model.DrugsStruct;
+import az.gov.e_health.esehiyye.Model.DttStruct;
 import az.gov.e_health.esehiyye.Model.NewsStruct;
 import az.gov.e_health.esehiyye.Model.UserStruct;
 import com.google.gson.Gson;
@@ -274,6 +275,43 @@ catch (Exception ex){
 
             Call<List<DrugsStruct>> getUserData = api.getDrugs(cypher1, cypher2);
             Response<List<DrugsStruct>> response = getUserData.execute();
+            list = response.body();
+
+
+            refreshCypher(cypher1, cypher2, view);
+
+
+            return list;
+
+
+        } catch (Exception ex) {
+
+            return list;
+
+        }
+
+
+    }
+    public List<DttStruct> getDttTimeline(String cypher1, String cypher2,String fin, final View view) {
+        List<DttStruct> list = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<DttStruct>> getUserData = api.dttTimeline(cypher1, cypher2,fin);
+            Response<List<DttStruct>> response = getUserData.execute();
             list = response.body();
 
 

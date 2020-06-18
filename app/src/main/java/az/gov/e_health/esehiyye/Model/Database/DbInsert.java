@@ -217,4 +217,45 @@ public class DbInsert {
 
 
     }
+
+    public List<FeedbackStatusStruct> deleteCourse(String cypher1, String cypher2, int id,int type, final View view) {
+        List<FeedbackStatusStruct> statusList = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<FeedbackStatusStruct>> deleteCourse = api.deleteCourse(cypher1, cypher2, id,type);
+            Response<List<FeedbackStatusStruct>> response = deleteCourse.execute();
+            statusList = response.body();
+
+
+
+            select.refreshCypher(cypher1, cypher2, view);
+
+
+            return statusList;
+
+
+        } catch (Exception ex) {
+
+            return statusList;
+
+        }
+
+
+    }
+
+
 }

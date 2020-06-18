@@ -49,7 +49,7 @@ public class NewsFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         sortedNewsList.clear();
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Xəbərlər");
         final ListView newsListView = view.findViewById(R.id.newsListView);
         final SearchView searchView = view.findViewById(R.id.newsSearch);

@@ -33,9 +33,9 @@ public class PasswordRecoveryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_password_recovery, container, false);
-        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Şifrənin bərpası");
-        ImageButton backButton = view.findViewById(R.id.backBtn);
+        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
