@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ public class ChangeEmailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        final View view = inflater.inflate(R.layout.fragment_email_change, container, false);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Email redaktəsi");
         ImageButton backButton = getActivity().findViewById(R.id.backBtn);

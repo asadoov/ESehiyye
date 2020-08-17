@@ -2,6 +2,7 @@ package az.gov.e_health.esehiyye.Model.Database;
 
 import az.gov.e_health.esehiyye.Model.CypherStruct;
 import az.gov.e_health.esehiyye.Model.DrugsStruct;
+import az.gov.e_health.esehiyye.Model.DttNewEventStruct;
 import az.gov.e_health.esehiyye.Model.DttStruct;
 import az.gov.e_health.esehiyye.Model.FeedbackStatusStruct;
 import az.gov.e_health.esehiyye.Model.NewsStruct;
@@ -41,7 +42,10 @@ public interface ApiInterface {
     Call<List<DttStruct>> dttTimeline(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("fin") String fin);
     @GET("/iosmobileapplication/dtt/dttdelete")
     Call<List<FeedbackStatusStruct>> deleteCourse(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("id") int id,@Query("type") int type);
-
+    @GET("/iosmobileapplication/dtt/konqreskonfranslist")
+    Call<List<DttNewEventStruct>> getDttNewEvents(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("fin") String fin, @Query("year") int year);
+    @GET("/iosmobileapplication//dtt/konqreskonfransinsert")
+    Call<List<FeedbackStatusStruct>> dttKonqresKonfransInsert(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("fin") String fin, @Query("year") int year,@Query("data") String data);
 
 
 

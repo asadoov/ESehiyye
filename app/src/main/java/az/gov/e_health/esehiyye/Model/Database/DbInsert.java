@@ -256,6 +256,43 @@ public class DbInsert {
 
 
     }
+    public List<FeedbackStatusStruct> dttKonqresKonfransInsert(String cypher1, String cypher2, String fin,int year,String data, final View view) {
+        List<FeedbackStatusStruct> statusList = new ArrayList<>();
 
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<FeedbackStatusStruct>> insertKonqresKonfrans = api.dttKonqresKonfransInsert(cypher1, cypher2, fin,year,data);
+            Response<List<FeedbackStatusStruct>> response = insertKonqresKonfrans.execute();
+            statusList = response.body();
+
+
+
+            select.refreshCypher(cypher1, cypher2, view);
+
+
+            return statusList;
+
+
+        } catch (Exception ex) {
+
+            return statusList;
+
+        }
+
+
+    }
 
 }

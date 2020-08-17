@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -72,6 +74,20 @@ public class DTTFragment extends Fragment {
 
         dttListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
+        view.findViewById(R.id.showDttMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DttMenu fragment = new DttMenu();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return  view;
     }
     @Override
@@ -121,7 +137,7 @@ public class DTTFragment extends Fragment {
 
                                 if (status != null) {
                                     if (status.size()>0) {
-                                        Toast.makeText(getContext(),status.get(0).RESULT, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getContext(),status.get(0).RESULT, Toast.LENGTH_SHORT).show();
                                         if (status.get(0).RESULT.equals("1")) {
                                             alertDialog.setTitle("Bildiriş");
                                             alertDialog.setMessage(String.format("(%s) adlı kursunuz silindi", dttList.get(pos).KURS_ADI));

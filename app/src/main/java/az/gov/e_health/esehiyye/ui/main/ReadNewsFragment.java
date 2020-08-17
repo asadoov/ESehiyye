@@ -31,13 +31,14 @@ public class ReadNewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_read_news, container, false);
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
 
-        ImageButton backButton = getActivity().findViewById(R.id.backBtn);
+        final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         Button saveBtn = getActivity().findViewById(R.id.saveChanges);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStack();
+                backButton.setVisibility(View.GONE);
             }
         });
         TextView newsTitle = view.findViewById(R.id.newsTitle);

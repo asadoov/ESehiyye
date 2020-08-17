@@ -1,6 +1,7 @@
 package az.gov.e_health.esehiyye.ui.main;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -141,7 +142,15 @@ public class DttYearsFragment extends Fragment {
                                 final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                                 alertDialog.setTitle("Xəta");
                                 alertDialog.setMessage("Biraz sonra yenidən cəht edin");
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yenilə",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                FragmentTransaction ft = getFragmentManager().beginTransaction();
 
+                                                ft.detach(DttYearsFragment.this).attach(DttYearsFragment.this).commit();
+                                            }
+                                        });
+alertDialog.show();
                             }
 
                         }
@@ -151,6 +160,22 @@ public class DttYearsFragment extends Fragment {
             }
         });
         newsThread.start();
+
+        view.findViewById(R.id.showDttMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                DttMenu fragment = new DttMenu();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         return  view;
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.DttNewEvents">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/dttNewEventList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:padding="16dp"
+android:gravity="bottom|right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:visibility="gone"
+            android:id="@+id/saveButton"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/blue_gradient"
+            android:text="Əlavə et (1)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</FrameLayout>

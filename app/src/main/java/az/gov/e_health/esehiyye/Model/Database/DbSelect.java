@@ -2,9 +2,11 @@ package az.gov.e_health.esehiyye.Model.Database;
 
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Toast;
 
 import az.gov.e_health.esehiyye.Model.CypherStruct;
 import az.gov.e_health.esehiyye.Model.DrugsStruct;
+import az.gov.e_health.esehiyye.Model.DttNewEventStruct;
 import az.gov.e_health.esehiyye.Model.DttStruct;
 import az.gov.e_health.esehiyye.Model.NewsStruct;
 import az.gov.e_health.esehiyye.Model.UserStruct;
@@ -316,6 +318,51 @@ catch (Exception ex){
 
 
             refreshCypher(cypher1, cypher2, view);
+
+
+            return list;
+
+
+        } catch (Exception ex) {
+
+            return list;
+
+        }
+
+
+    }
+    public List<DttNewEventStruct> getDttNewEvents(String cypher1, String cypher2, String fin,int year, final View view) {
+        List<DttNewEventStruct> list = new ArrayList<>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<DttNewEventStruct>> getDttNewEvents = api.getDttNewEvents(cypher1, cypher2,fin,year);
+            Response<List<DttNewEventStruct>> response = getDttNewEvents.execute();
+            if (response.code()==200){
+                list = response.body();
+
+
+                refreshCypher(cypher1, cypher2, view);
+
+            }
+            else {
+
+                Toast.makeText(view.getContext(), "Zəhmət olmasa biraz sonra yenidən cəht edin", Toast.LENGTH_SHORT).show();
+            }
+
 
 
             return list;
