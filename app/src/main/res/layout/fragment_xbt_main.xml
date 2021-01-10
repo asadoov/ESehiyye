@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.XBT.Xbt_main">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/notFoundLabel"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Tapılmadı :("/>
+
+    <LinearLayout
+
+        android:id="@+id/xbtListLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView android:id="@+id/xbtSearch"
+            android:iconifiedByDefault="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Axtar..."/>
+
+
+
+        <ListView
+            android:padding="10dp"
+            android:id="@+id/xbtFirstList"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+
+</FrameLayout>

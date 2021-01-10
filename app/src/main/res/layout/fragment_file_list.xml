@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.FileCats">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/notFoundLabel"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Sizin hələki heç bir sənədiniz yoxdur :(\n\n  İlk sənədi, aşağıdaki + düyməsinə basaraq əlavə edə bilərsiniz"/>
+
+    <LinearLayout
+
+        android:id="@+id/fileListLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+                <SearchView android:id="@+id/fileSearch"
+                    android:iconifiedByDefault="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:queryHint="Sənədin adını daxıl edin..."/>
+
+
+
+        <ListView
+            android:padding="10dp"
+            android:id="@+id/files"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/addFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/plus_ico"
+        android:tint="@android:color/white"
+        />
+</FrameLayout>

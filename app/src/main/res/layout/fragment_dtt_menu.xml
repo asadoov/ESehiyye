@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.DttMenu">
+    tools:context=".ui.main.Dtt.DttMenu">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -23,6 +23,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"/>
        <Button
+           android:id="@+id/dttDocImprove"
            android:textAllCaps="false"
            android:text="Təkmilləşdirmə kursları"
            android:layout_width="match_parent"
@@ -51,37 +52,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/felsefe"
             android:textAllCaps="false"
             android:text="Fəlsəfə və ya tibb elmləri doktoru dərəcəsi almaq üçün dissertasiya işi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/elmiJurnal"
             android:textAllCaps="false"
             android:text="Elmi jurnallarda dərc etdirilən elmi işlər"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
-
+            android:id="@+id/tibbiyardim"
             android:textAllCaps="false"
             android:text="Tibbi yardım göstərilməsi üzrə yeni metodlar və texnologiyalar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/ixtisas"
             android:text="İxtisas üzrə sənədlərin hazırlanması"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/tibbitehsil"
             android:text="Tibb təhsili proqramı çərçivəsində ixtisas üzrə müəllimlik fəaliyyəti"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/kurasiya"
             android:text="Kurasiya işi (rezidentlərin təhsili, tələbələrin yay təcrübəsi)"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
+            android:id="@+id/trener"
             android:text="DTT proqramları çərçivəsində ixtisas üzrə trener fəaliyyəti"
             android:textAllCaps="false"
             android:layout_width="match_parent"

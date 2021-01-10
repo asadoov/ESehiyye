@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,7 +48,8 @@ public class NewsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_news, container, false);
-
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
         sortedNewsList.clear();
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
         toolbarTitle.setText("Xəbərlər");

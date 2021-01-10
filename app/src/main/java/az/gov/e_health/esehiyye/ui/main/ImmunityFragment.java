@@ -35,7 +35,7 @@ public class ImmunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-View view = inflater.inflate(R.layout.fragment_immunity, container, false);
+        View view = inflater.inflate(R.layout.fragment_immunity, container, false);
         //ArrayAdapter adapter = new ArrayAdapter<String>(getContext(),R.id.immunityList,immunityItems);
 
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
@@ -52,19 +52,19 @@ View view = inflater.inflate(R.layout.fragment_immunity, container, false);
 
         ListView immunityList = view.findViewById(R.id.immunityList);
 
-        String[] values = new String[] { "Doğumdan sonra 12 saat ərzində",
+        String[] values = new String[]{"Doğumdan sonra 12 saat ərzində",
                 "4-7-ci gün ",
                 "2 aylıqda",
-        "3 aylıqda",
-        "6 aylıqda",
-        "12 aylıqda",
+                "3 aylıqda",
+                "6 aylıqda",
+                "12 aylıqda",
                 "18 aylıqda",
                 "6 yaşında"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, values);
         immunityList.setAdapter(adapter);
-      final   AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -75,14 +75,14 @@ View view = inflater.inflate(R.layout.fragment_immunity, container, false);
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                switch (position){
-                case 0:
+                switch (position) {
+                    case 0:
 
-                    alertDialog.setTitle("Doğumdan sonra 12 saat ərzində");
-                    alertDialog.setMessage("Hepatit B xəstəliyinə qarşı peyvənd");
+                        alertDialog.setTitle("Doğumdan sonra 12 saat ərzində");
+                        alertDialog.setMessage("Hepatit B xəstəliyinə qarşı peyvənd");
 
-                    alertDialog.show();
-                    break;
+                        alertDialog.show();
+                        break;
                     case 1:
                         alertDialog.setTitle("4-7-ci gün");
                         alertDialog.setMessage("Vərəm əleyhinə peyvənd\n\nPoliomelitə qarşı peyvənd");
@@ -130,7 +130,7 @@ View view = inflater.inflate(R.layout.fragment_immunity, container, false);
             }
         });
 //        setListAdapter(adapter);
-return view;
+        return view;
     }
 
 }

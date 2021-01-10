@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerItems">
+
+        <item tag="3">Abşeron</item>
+        <item tag="4">Ağcəbədi</item>
+        <item tag="5">Ağdam</item>
+        <item tag="6">Ağdaş</item>
+        <item tag="7">Ağdərə</item>
+        <item tag="8">Ağstafa</item>
+        <item tag="9">Ağsu</item>
+        <item tag="10">Astara</item>
+        <item tag="2">Bakı</item>
+        <item tag="11">Balakən</item>
+        <item tag="12">Beyləqan</item>
+        <item tag="14">Biləsuvar</item>
+        <item tag="13">Bərdə</item>
+        <item tag="15">Cəbrayıl</item>
+        <item tag="16">Cəlilabad</item>
+        <item tag="17">Daşkəsən</item>
+        <item tag="20">F&#252;zuli</item>
+        <item tag="23">Goranboy</item>
+        <item tag="24">G&#246;y&#231;ay</item>
+        <item tag="27">G&#246;yg&#246;l</item>
+        <item tag="21">Gədəbəy</item>
+        <item tag="22">Gəncə</item>
+        <item tag="25">Hacıqabul</item>
+        <item tag="31">İmişli</item>
+        <item tag="32">İsmayıllı</item>
+        <item tag="34">K&#252;rdəmir</item>
+        <item tag="33">Kəlbəcər</item>
+        <item tag="41">La&#231;ın</item>
+        <item tag="42">Lerik</item>
+        <item tag="43">Lənkəran</item>
+        <item tag="44">Masallı</item>
+        <item tag="45">Mingə&#231;evir</item>
+        <item tag="46">Naftalan</item>
+        <item tag="47">Nax&#231;ıvan</item>
+        <item tag="48">Neft&#231;ala</item>
+        <item tag="49">Oğuz</item>
+        <item tag="35">Qax</item>
+        <item tag="36">Qazax</item>
+        <item tag="38">Qobustan</item>
+        <item tag="39">Quba</item>
+        <item tag="72">Qubadlı</item>
+        <item tag="40">Qusar</item>
+        <item tag="37">Qəbələ</item>
+        <item tag="50">Saatlı</item>
+        <item tag="51">Sabirabad</item>
+        <item tag="18">Şabran</item>
+        <item tag="52">Salyan</item>
+        <item tag="56">Şamaxı</item>
+        <item tag="53">Samux</item>
+        <item tag="19">Şirvan</item>
+        <item tag="54">Siyəzən</item>
+        <item tag="55">Sumqayıt</item>
+        <item tag="68">Şuşa</item>
+        <item tag="57">Şəki</item>
+        <item tag="58">Şəmkir</item>
+        <item tag="61">Tovuz</item>
+        <item tag="60">Tərtər</item>
+        <item tag="62">Ucar</item>
+        <item tag="26">Xa&#231;maz</item>
+        <item tag="28">Xızı</item>
+        <item tag="73">Xocalı</item>
+        <item tag="29">Xocavənd</item>
+        <item tag="63">Yardımlı</item>
+        <item tag="64">Yevlax</item>
+        <item tag="65">Zaqatala</item>
+        <item tag="66">Zəngilan</item>
+        <item tag="67">Zərdab</item>
+    </string-array>
+    <string-array name="ID_REGIONS">
+
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>2</item>
+        <item>11</item>
+        <item>12</item>
+        <item>14</item>
+        <item>13</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>20</item>
+        <item>23</item>
+        <item>24</item>
+        <item>27</item>
+        <item>21</item>
+        <item>22</item>
+        <item>25</item>
+        <item>31</item>
+        <item>32</item>
+        <item>34</item>
+        <item>33</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>35</item>
+        <item>36</item>
+        <item>38</item>
+        <item>39</item>
+        <item>72</item>
+        <item>40</item>
+        <item>37</item>
+        <item>50</item>
+        <item>51</item>
+        <item>18</item>
+        <item>52</item>
+        <item>56</item>
+        <item>53</item>
+        <item>19</item>
+        <item>54</item>
+        <item>55</item>
+        <item>68</item>
+        <item>57</item>
+        <item>58</item>
+        <item>61</item>
+        <item>60</item>
+        <item>62</item>
+        <item>26</item>
+        <item>28</item>
+        <item>73</item>
+        <item>29</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+    </string-array>
+</resources>

@@ -3,12 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.DttDocImproveCourseFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".ui.main.Dtt.DttDocImproveCourseFragment">
     <TextView
+        android:id="@+id/notFoundLabel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center"
+        android:text="Bura hələki boşdur :("
+        android:textSize="20dp"
+        android:visibility="gone" />
+    <ListView
+        android:id="@+id/dttDocImproveList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:padding="16dp"
+        android:gravity="bottom|right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:visibility="gone"
+            android:id="@+id/saveButton"
+            android:padding="15dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/blue_gradient"
+            android:text="Əlavə et (1)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
 </FrameLayout>

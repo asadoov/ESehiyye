@@ -1,26 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dttYearsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.DttYearsFragment"
-    android:id="@+id/dttYearsFragment">
+    tools:context=".ui.main.Dtt.DttYearsFragment">
 
+    <TextView
+        android:id="@+id/notFoundLabel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Bura hələki boşdur:(\n\n  İnkişaf planınıza əlavə etmək üçün, aşağıdaki + düyməsini sıxaraq əlavə edə bilərsiniz"
+        android:textSize="20dp"
+        android:visibility="gone" />
     <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/yearsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_height="wrap_content" />
 
-        android:id="@+id/showDttMenu"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/plus_ico"
-        android:tint="@android:color/white"
-        />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/showDttMenu"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="3dp"
+            android:src="@drawable/plus_ico"
+            android:tint="@android:color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/sendDtt"
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            android:src="@drawable/ic_send_ico"
+            android:tint="@android:color/white" />
+    </LinearLayout>
 </FrameLayout>

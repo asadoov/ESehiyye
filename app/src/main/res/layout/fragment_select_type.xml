@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.Institutions.SelectRegion">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/notFoundLabel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Tapılmadı :("
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+
+        android:id="@+id/typeListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/typeSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="Müəssisə tipini daxıl edin..." />
+
+
+        <ListView
+            android:id="@+id/typeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </LinearLayout>
+
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/fileListLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Regionu seçin :" />-->
+
+    <!--            <Spinner-->
+    <!--                android:id="@+id/regionSpinner"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:entries="@array/spinnerItems" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Müəssisə tipi :" />-->
+
+    <!--            <Spinner-->
+    <!--                android:id="@+id/typeSpinner"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content" />-->
+    <!--        </LinearLayout>-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Müəssisə: " />-->
+
+    <!--            <Spinner-->
+    <!--                android:id="@+id/instSpinner"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/showResults"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="@drawable/gradient"-->
+    <!--            android:text="Göstər"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textColor="@android:color/white" />-->
+
+    <!--    </LinearLayout>-->
+
+</FrameLayout>

@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,72 +67,94 @@ public class FeedbackFragment extends Fragment {
                 MODE_PRIVATE);
 
         String jsonUserData = sharedPreferences.getString("userData", "");
-        Gson gson = new GsonBuilder().setLenient().create();
-
-     final List<UserStruct> userList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
-
         final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+        if (jsonUserData != "") {
+            Gson gson = new GsonBuilder().setLenient().create();
+
+            final List<UserStruct> userList = Arrays.asList(gson.fromJson(jsonUserData, UserStruct[].class));
+
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            EditText feedback = view.findViewById(R.id.feedbackTxt);
+            final String feedbackText = feedback.getText().toString();
+            if (feedbackText.length() > 5) {
+                Thread sendFeedbackThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+
+
+                                progressDialog = new ProgressDialog(getContext());
+                                progressDialog.setMessage("Yüklənir. Gözləyin...");
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
+                            }
+                        });
+                        SharedPreferences sharedPreferences
+                                = getContext().getSharedPreferences("MySharedPref",
+                                MODE_PRIVATE);
+                        final List<FeedbackStatusStruct> status = insert.sendFeedback(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), feedbackText, view);
+
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                if (status.size() > 0) {
+
+                                    alertDialog.setTitle("Bildiriş");
+                                    alertDialog.setMessage(String.format("Müraciətiniz göndərildi, 24 saat ərzində emailınıza (%s) cavab göndəriləcək", userList.get(0).EMAIL));
+                                } else {
+                                    alertDialog.setTitle("Xəta");
+                                    alertDialog.setMessage("Təəssüfki müraciətinizi göndərmək mümkün olmadı, biraz sonra yenidən cəht edin");
+
+
+                                }
+                                alertDialog.show();
+                            }
+                        });
+
+
+                        progressDialog.dismiss();
+
                     }
                 });
-        EditText feedback = view.findViewById(R.id.feedbackTxt);
-         final String feedbackText = feedback.getText().toString();
-         if (feedbackText.length()>5) {
-             Thread sendFeedbackThread = new Thread(new Runnable() {
-                 @Override
-                 public void run() {
-                     getActivity().runOnUiThread(new Runnable() {
-                         public void run() {
 
+                sendFeedbackThread.start();
 
-                   progressDialog  = new ProgressDialog(getContext());
-                     progressDialog.setMessage("Yüklənir. Gözləyin...");
-                     progressDialog.setCancelable(false);
-                     progressDialog.show();
-                         }
-                     });
-                     SharedPreferences sharedPreferences
-                             = getContext().getSharedPreferences("MySharedPref",
-                             MODE_PRIVATE);
-                     final List<FeedbackStatusStruct> status = insert.sendFeedback(sharedPreferences.getString("cypher1", null), sharedPreferences.getString("cypher2", null), feedbackText, view);
-
-
-                     getActivity().runOnUiThread(new Runnable() {
-                         public void run() {
-
-                             if (status.size() > 0) {
-
-                                 alertDialog.setTitle("Bildiriş");
-                                 alertDialog.setMessage(String.format("Müraciətiniz göndərildi, 24 saat ərzində emailınıza (%s) cavab göndəriləcək",userList.get(0).EMAIL));
-                             } else {
-                                 alertDialog.setTitle("Xəta");
-                                 alertDialog.setMessage("Təəssüfki müraciətinizi göndərmək mümkün olmadı, biraz sonra yenidən cəht edin");
-
-
-                             }
-                             alertDialog.show();
-                         }
-                     });
-
-
-                     progressDialog.dismiss();
-
-                 }
-             });
-
-             sendFeedbackThread.start();
-
-         }
-         else
-
-         {
-             alertDialog.setTitle("Bildiriş");
-             alertDialog.setMessage("Müraciətiniz daha ətraflı olmalıdır");
-             alertDialog.show();
-         }
+            } else {
+                alertDialog.setTitle("Bildiriş");
+                alertDialog.setMessage("Müraciətiniz daha ətraflı olmalıdır");
+                alertDialog.show();
+            }
+        }
+        else {
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Daxil ol",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginFragment loginFragment = new LoginFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.appContainer, loginFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Bağla",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.setTitle("Bildiriş");
+            alertDialog.setMessage("Müraciət etmək üçün sistemə giriş etməyiniz vacibdir");
+            alertDialog.show();
+        }
     }
 
 }
