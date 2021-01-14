@@ -293,7 +293,7 @@ public class DbInsert {
             statusList = response.body();
 
 
-            if (!response.isSuccessful()) {
+            if (response.isSuccessful()) {
                 select.refreshCypher(cypher1, cypher2, view);
             } else {
                 select.ShowServerExceptionAlert(view);
@@ -336,7 +336,7 @@ public class DbInsert {
             statusList = response.body();
 
 
-            if (!response.isSuccessful()) {
+            if (response.isSuccessful()) {
                 select.refreshCypher(cypher1, cypher2, view);
             } else {
                 select.ShowServerExceptionAlert(view);

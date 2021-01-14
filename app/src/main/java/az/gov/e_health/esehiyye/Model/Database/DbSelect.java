@@ -325,14 +325,14 @@ public class DbSelect {
                 new Runnable() {
                     @Override
                     public void run() {
-                        final FragmentManager fragManager = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+
                         final AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
                         alertDialog.setTitle("Server xətası");
-                        alertDialog.setMessage("Biraz sonra yenidən cəht edin");
+                        alertDialog.setMessage("Biraz sonra yenidən cəhd edin");
                         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Əsas səhifə",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-
+                                        final FragmentManager fragManager = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
                                         fragManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 

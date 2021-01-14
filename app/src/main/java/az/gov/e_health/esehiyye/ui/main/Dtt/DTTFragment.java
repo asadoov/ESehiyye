@@ -4,12 +4,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -21,12 +15,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import az.gov.e_health.esehiyye.Model.Adapters.Dtt.DttAdapter;
-import az.gov.e_health.esehiyye.Model.Database.DbInsert;
 import az.gov.e_health.esehiyye.Model.DTT.DttStruct;
+import az.gov.e_health.esehiyye.Model.Database.DbInsert;
 import az.gov.e_health.esehiyye.Model.FeedbackStatusStruct;
 import az.gov.e_health.esehiyye.R;
 
@@ -52,7 +51,7 @@ public class DTTFragment extends Fragment {
         adapter = new DttAdapter(getContext(), dttList);
         registerForContextMenu(dttListView);
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Fərdi inkiş planım");
+        toolbarTitle.setText("Fərdi inkişaş planı");
         final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {

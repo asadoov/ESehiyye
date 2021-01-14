@@ -111,7 +111,9 @@ public class DttYearsFragment extends Fragment {
 
                             }
                         }
-                        Collections.reverse(years);
+                        Collections.sort(years);
+
+                        //Collections.reverse(years);
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 adapter = new ArrayAdapter<String>(getContext(),

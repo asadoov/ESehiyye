@@ -5,6 +5,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -13,24 +19,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-
-import az.gov.e_health.esehiyye.Model.UserStruct;
-
-import az.gov.e_health.esehiyye.R;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Arrays;
-
 import java.util.List;
+
+import az.gov.e_health.esehiyye.Model.UserStruct;
+import az.gov.e_health.esehiyye.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -54,15 +51,15 @@ public class AppFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 
-        isFirstRun = prefs.getBoolean("1.2", true);
+        isFirstRun = prefs.getBoolean("1.2.1", true);
         if (isFirstRun) {
             showUpdateInfo();
         }
         isFirstRun = false;
 
-        prefs.edit().putBoolean("1.2", isFirstRun).commit();
+        prefs.edit().putBoolean("1.2.1", isFirstRun).commit();
 
-        prefs.edit().remove("1.1.5").commit();
+        prefs.edit().remove("1.2").commit();
 
 
         final View view = inflater.inflate(R.layout.fragment_app, container, false);
@@ -162,8 +159,8 @@ public class AppFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
-        alertDialog.setTitle("Böyük yenilənmə");
-        alertDialog.setMessage("Versiya: 1.2\n* Həkimlər üçün \"Davamlı Tibbi Təhsil\" bölümü yaradıldı!");
+        alertDialog.setTitle("Yeniliklər");
+        alertDialog.setMessage("Versiya: 1.2.1\n*Alqoritmlərin təkminləşdirilməsi\n* Həkimlər üçün \"Davamlı Tibbi Təhsil\" bölümü yaradıldı!");
         alertDialog.show();
     }
 
