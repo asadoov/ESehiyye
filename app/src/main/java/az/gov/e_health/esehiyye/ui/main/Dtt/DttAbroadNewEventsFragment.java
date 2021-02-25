@@ -18,10 +18,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+
 import az.gov.e_health.esehiyye.Model.Database.DbInsert;
 import az.gov.e_health.esehiyye.Model.FeedbackStatusStruct;
 import az.gov.e_health.esehiyye.R;
@@ -252,6 +254,7 @@ public class DttAbroadNewEventsFragment extends Fragment {
 
             }
         });
+
         return view;
     }
 

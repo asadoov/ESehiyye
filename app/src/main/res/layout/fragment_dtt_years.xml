@@ -17,6 +17,7 @@
     <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/yearsList"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -26,8 +27,40 @@
         android:layout_margin="5dp"
         android:gravity="bottom"
         android:orientation="vertical">
+        <Button
+            android:id="@+id/showDttMenu"
+            android:padding="15dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="bottom|end"
+            android:textColor="@android:color/white"
+            android:background="@drawable/blue_gradient"
+            android:text="Plana əlavə et"
+            android:textAllCaps="false"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_plus_ico"
+            android:drawableTint="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+            <Button
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sendDtt"
+                android:padding="15dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/blue_gradient"
+                android:text="Baş həkimə göndər"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/ic_send_ico"
+android:textAllCaps="false"
+                android:drawableTint="@android:color/white"
+                android:layout_margin="3dp"
+                android:layout_gravity="bottom|end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+
+        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
 
             android:id="@+id/showDttMenu"
 
@@ -47,6 +80,6 @@
             android:layout_gravity="bottom|end"
 
             android:src="@drawable/ic_send_ico"
-            android:tint="@android:color/white" />
+            android:tint="@android:color/white" />-->
     </LinearLayout>
 </FrameLayout>

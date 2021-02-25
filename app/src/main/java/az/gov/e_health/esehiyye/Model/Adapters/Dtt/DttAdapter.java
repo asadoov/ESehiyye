@@ -15,6 +15,7 @@ import az.gov.e_health.esehiyye.R;
 public class DttAdapter extends BaseAdapter {
     private Context context; //context
     private List<DttStruct> items; //data source of the list adapter
+
     //public constructor
     public DttAdapter(Context context, List<DttStruct> items) {
         this.context = context;
@@ -53,14 +54,21 @@ public class DttAdapter extends BaseAdapter {
                 convertView.findViewById(R.id.courseStart);
         TextView courseEnd =
                 convertView.findViewById(R.id.courseEnd);
-
+        TextView courseCredit =
+                convertView.findViewById(R.id.credit);
+        TextView courseAccepted =
+                convertView.findViewById(R.id.accepted);
         //sets the text for item name and item description from the current item object
         courseTitle.setText(currentItem.KURS_ADI);
-        courseStart.setText("Başlama tarixi: "+currentItem.KURS_BASHLAMA_TARIXI);
-        courseEnd.setText("Bitmə tarixi: "+currentItem.KURS_BITME_TARIXI);
-
-
-        // returns the view for the current row
-        return convertView;
+        courseStart.setText("Başlama tarixi: " + currentItem.KURS_BASHLAMA_TARIXI);
+        courseEnd.setText("Bitmə tarixi: " + currentItem.KURS_BITME_TARIXI);
+        courseCredit.setText("Kredit: " + currentItem.KREDIT);
+        if (currentItem.TESTIQLENIB.equals("1")) {
+            courseAccepted.setText("Status: təsdiqlənib");
+        } else
+        {
+            courseAccepted.setText("Status: gözləyir");
+        }            // returns the view for the current row
+            return convertView;
     }
 }

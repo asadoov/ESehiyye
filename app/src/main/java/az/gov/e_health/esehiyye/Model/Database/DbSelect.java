@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import az.gov.e_health.esehiyye.Model.CovidStruct;
 import az.gov.e_health.esehiyye.Model.CypherStruct;
 import az.gov.e_health.esehiyye.Model.DTT.DttDocImproveCourseStruct;
 import az.gov.e_health.esehiyye.Model.DTT.DttNewEventStruct;
@@ -1115,6 +1116,39 @@ public class DbSelect {
 
         } catch (Exception ex) {
             ShowInternetExceptionAlert(view);
+            return obj;
+
+        }
+
+
+    }
+
+    public List<CovidStruct> GetCovidLive() {
+        List<CovidStruct> obj = new ArrayList<>();
+
+        try {
+
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.covidURL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<List<CovidStruct>> getUserData = api.GetCovidLive();
+            Response<List<CovidStruct>> response = getUserData.execute();
+            obj = response.body();
+
+
+            return obj;
+
+
+        } catch (Exception ex) {
+
             return obj;
 
         }

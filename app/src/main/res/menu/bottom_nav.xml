@@ -25,6 +25,12 @@
         android:icon="@drawable/news"
         android:title="Xəbərlər"
         app:showAsAction="ifRoom"/>
+<!--    <item-->
+<!--        android:id="@+id/notifications"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_notifications_ico"-->
+<!--        android:title="Bildirişlər"-->
+<!--        app:showAsAction="ifRoom"/>-->
     <item
         android:iconTint="@android:color/black"
         android:id="@+id/settings"

@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -53,6 +56,7 @@ public class DttDocImproveCourseFragment extends Fragment {
     List<UserStruct> usrList;
     ListView dttDocImproveListView;
     List<String> selectedEventsId = new ArrayList<>();
+    TextView notFoundLabel;
 
     // TODO: Rename and change types and number of parameters
     public static DttDocImproveCourseFragment newInstance(String param1, String param2) {
@@ -77,7 +81,7 @@ public class DttDocImproveCourseFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_dtt_doc_improve_course, container, false);
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Təkmilləşdirmə kursları");
+        toolbarTitle.setText("Təkminləşdirmə kursları");
         final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +92,7 @@ public class DttDocImproveCourseFragment extends Fragment {
             }
         });
         dttDocImproveListView = view.findViewById(R.id.dttDocImproveList);
-
+        notFoundLabel = view.findViewById(R.id.notFoundLabel);
         final Thread newsThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -264,6 +268,113 @@ public class DttDocImproveCourseFragment extends Fragment {
                 //  Toast.makeText(getContext(), eventsId, Toast.LENGTH_SHORT).show();
             }
         });
+        final SearchView searchView = view.findViewById(R.id.eventSearch);
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+
+                    // Override onQueryTextSubmit method
+                    // which is call
+                    // when submitquery is searched
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+
+                    // This method is overridden to filter
+                    // the adapter according to a search query
+                    // when the user is typing search
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+
+                        final List<DttDocImproveCourseStruct> temp = new ArrayList<>();
+
+                        temp.clear();
+                        for (DttDocImproveCourseStruct item : dttDocImproveList) {
+                            if (item.KURSUN_ADI.toLowerCase().contains(newText.toLowerCase())) {
+                                temp.add(item);
+
+                            }
+
+
+                        }
+                        if (temp != null) {
+                            if (temp.size() > 0) {
+                                new Handler(Looper.getMainLooper()).post(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dttDocImproveListView.setVisibility(View.VISIBLE);
+                                                notFoundLabel.setVisibility(View.GONE);
+                                                //  Log.d("UI thread", "I am the UI thread");
+                                            }
+                                        });
+                                if (temp != null) {
+                                    if (temp.size() > 0) {
+                                        adapter = new DttDocImproveAdapter(getContext(), temp);
+                                        dttDocImproveListView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+
+
+
+                                        dttDocImproveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> adapterView, View item, int position, long l) {
+
+                                                CheckBox newEventCheckBox = item.findViewById(R.id.newEventCheckBox);
+                                                Button saveButton = (Button) view.findViewById(R.id.saveButton);
+                                                if (temp.get(position).isChecked == true) {
+                                                    temp.get(position).isChecked = false;
+
+                                                    newEventCheckBox.setChecked(false);
+                                                    temp.remove(String.valueOf(temp.get(position).ID));
+
+                                                } else {
+                                                    temp.get(position).isChecked = true;
+                                                    newEventCheckBox.setChecked(true);
+                                                    selectedEventsId.add(String.valueOf(temp.get(position).ID));
+
+                                                }
+                                                if (selectedEventsId.size() > 0) {
+                                                    saveButton.setVisibility(View.VISIBLE);
+                                                    saveButton.setText(String.format("Əlavə et (%s)", selectedEventsId.size()));
+
+                                                } else {
+                                                    saveButton.setVisibility(View.GONE);
+                                                }
+
+                                                //dttNewEventsListView.setAdapter(adapter);
+                                                //adapter.notifyDataSetChanged();
+                                            }
+                                        });
+
+                                    }
+
+
+                                }
+
+
+                            } else {
+
+
+                                new Handler(Looper.getMainLooper()).post(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dttDocImproveListView.setVisibility(View.GONE);
+                                                notFoundLabel.setVisibility(View.VISIBLE);
+                                                //  Log.d("UI thread", "I am the UI thread");
+                                            }
+                                        });
+                            }
+                        }
+
+
+                        return true;
+                    }
+                });
         return view;
     }
 }

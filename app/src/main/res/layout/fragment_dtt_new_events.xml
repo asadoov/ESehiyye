@@ -6,24 +6,46 @@
     tools:context=".ui.main.Dtt.DttNewEvents">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/dttNewEventList"
+    <TextView
+        android:id="@+id/notFoundLabel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Bura hələki boşdur :("
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/eventSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:queryHint="Kursun adını daxil edin..." />
+
+        <ListView
+            android:id="@+id/dttNewEventList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <RelativeLayout
-        android:padding="16dp"
-android:gravity="bottom|right"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="bottom|right"
+        android:padding="16dp">
+
         <Button
-            android:visibility="gone"
             android:id="@+id/saveButton"
-            android:padding="15dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/blue_gradient"
-            android:text="Əlavə et (1)"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_gradient"
+            android:padding="15dp"
+            android:text="Əlavə et (1)"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
     </RelativeLayout>
 </FrameLayout>

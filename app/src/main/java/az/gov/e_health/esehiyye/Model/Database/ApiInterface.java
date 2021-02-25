@@ -2,6 +2,7 @@ package az.gov.e_health.esehiyye.Model.Database;
 
 import java.util.List;
 
+import az.gov.e_health.esehiyye.Model.CovidStruct;
 import az.gov.e_health.esehiyye.Model.CypherStruct;
 import az.gov.e_health.esehiyye.Model.DTT.DttDocImproveCourseStruct;
 import az.gov.e_health.esehiyye.Model.DTT.DttNewEventStruct;
@@ -28,6 +29,8 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     String BASE_URL = "https://eservice.e-health.gov.az";
+
+    String covidURL = "https://api.covid19api.com";
 
     @GET("/iosmobileapplication/user/login")
     Call<List<CypherStruct>> getSignInCypher(@Query("email") String email, @Query("pass") String pass);
@@ -147,5 +150,7 @@ public interface ApiInterface {
 
     @GET("/iosmobileapplication/xbt/xbtlist")
     Call<List<XbtStruct>> GetXbtList(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("id") long id);
+    @GET("/live/country/Azerbaijan")
+    Call<List<CovidStruct>> GetCovidLive();
 }
 

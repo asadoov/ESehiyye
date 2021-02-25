@@ -1,7 +1,6 @@
 package az.gov.e_health.esehiyye;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,10 +10,20 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.OnCompleteListener;
+import com.google.android.play.core.tasks.Task;
+
 public class AppRater {
     private final static String APP_TITLE = "Elektron Səhiyyə";// App Name
     private final static String APP_PNAME = "az.gov.e_health.esehiyye";// Package Name
 
+    ReviewManager manager;
+    ReviewInfo reviewInfo;
     private final static int DAYS_UNTIL_PROMPT = 3;//Min number of days
     private final static int LAUNCHES_UNTIL_PROMPT = 3;//Min number of launches
 
@@ -48,8 +57,21 @@ public class AppRater {
         editor.commit();
     }
 
-    public static void showRateDialog(final Context mContext, final SharedPreferences.Editor editor) {
+    private void initReviewInfo(final Context mContext) {
+        manager = ReviewManagerFactory.create(mContext);
+        com.google.android.play.core.tasks.Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+            @Override
+            public void onComplete(@NonNull Task<ReviewInfo> task) {
+                if (task.isSuccessful()) {
+                    reviewInfo = task.getResult();
+                } else {
+                }
+            }
+        });
+    }
 
+    public static void showRateDialog(final Context mContext, final SharedPreferences.Editor editor) {
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 

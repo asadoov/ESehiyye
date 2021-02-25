@@ -130,6 +130,7 @@
                 android:text="Email redaktəsi"
                 android:textAlignment="viewStart" />
 
+
             <Button
                 android:textAllCaps="false"
                 android:id="@+id/changePassword"

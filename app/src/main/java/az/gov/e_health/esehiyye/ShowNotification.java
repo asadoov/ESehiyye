@@ -1,26 +1,20 @@
 package az.gov.e_health.esehiyye;
 
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import android.util.Log;
+import java.util.List;
 
-import java.util.Random;
-
-import az.gov.e_health.esehiyye.MainActivity;
-import az.gov.e_health.esehiyye.R;
+import az.gov.e_health.esehiyye.Model.CovidStruct;
+import az.gov.e_health.esehiyye.Model.Database.DbSelect;
 
 public class ShowNotification extends BroadcastReceiver {
-
+DbSelect select = new DbSelect();
     // private final static String TAG = "az.gov.e_health.esehiyye.ShowNotification";
 
 //    @Override
@@ -65,36 +59,52 @@ public class ShowNotification extends BroadcastReceiver {
 
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        final String[] values = new String[]{
-                "Artıq tibbi sənədlərinizi tətbiqdə 'Tibbi sənədlərim' bölməsinə yükləyə bilərsiniz",
-                "Dərman vasitələri haqqında məlumat almaq üçün müvafiq bölüməyə daxil olaraq məlumat ala bilərsiniz",
-                "Ən son xəbərləri 'Xəbərlər' bölməsindən izləyə bilərsiniz",
-                "İmmunoprofilaktika barədə məlumat almaq üçün müvafiq bölümdən istifadə edə bilərsiniz",
-                "Həkim tərəfindən sizə təyin olunmuş reseptləri əsas səhifədəki müvafiq bölümdən görə bilərsiniz",
-                "Tətbiqimizdə, Azərbaycanda fəaliyyət göstərən bütün tibb müəssisələri, aptek, poliklinikalar və sair səhiyyə obyektləri barədə ətraflı məlumat ala bilərsiniz"
+    public void onReceive(final Context context, Intent intent) {
+//        final String[] values = new String[]{
+//                "Artıq tibbi sənədlərinizi tətbiqdə 'Tibbi sənədlərim' bölməsinə yükləyə bilərsiniz",
+//                "Dərman vasitələri haqqında məlumat almaq üçün müvafiq bölüməyə daxil olaraq məlumat ala bilərsiniz",
+//                "Ən son xəbərləri 'Xəbərlər' bölməsindən izləyə bilərsiniz",
+//                "İmmunoprofilaktika barədə məlumat almaq üçün müvafiq bölümdən istifadə edə bilərsiniz",
+//                "Həkim tərəfindən sizə təyin olunmuş reseptləri əsas səhifədəki müvafiq bölümdən görə bilərsiniz",
+//                "Tətbiqimizdə, Azərbaycanda fəaliyyət göstərən bütün tibb müəssisələri, aptek, poliklinikalar və sair səhiyyə obyektləri barədə ətraflı məlumat ala bilərsiniz"
+//
+//
+//        };
 
+//        Random rand = new Random();
+//        int rand_int1 = rand.nextInt(values.length);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<CovidStruct>  covidList = select.GetCovidLive();
 
-        };
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, "M_CH_ID");
 
-        Random rand = new Random();
-        int rand_int1 = rand.nextInt(values.length);
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, "M_CH_ID");
-
-        notificationBuilder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                // .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.es_logo)
-                .setTicker("Hearty365")
-                .setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API
-                .setContentTitle("Bilirdinizmi?")
-                .setDefaults(Notification.DEFAULT_SOUND)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(values[rand_int1]))
-                .setContentText(values[rand_int1])
-                .setContentInfo("Info");
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(200, notificationBuilder.build());
+//        notificationBuilder.setAutoCancel(true)
+//                .setDefaults(Notification.DEFAULT_ALL)
+//                // .setWhen(System.currentTimeMillis())
+//                .setSmallIcon(R.drawable.es_logo)
+//                .setTicker("Hearty365")
+//                .setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API
+//                .setContentTitle("Bilirdinizmi?")
+//                .setDefaults(Notification.DEFAULT_SOUND)
+//                .setStyle(new NotificationCompat.BigTextStyle().bigText(values[rand_int1]))
+//                .setContentText(values[rand_int1])
+//                .setContentInfo("Info");
+                notificationBuilder.setAutoCancel(true)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        // .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.es_logo)
+                        .setTicker("Hearty365")
+                        .setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API
+                        .setContentTitle("COVID-19: AZƏRBAYCANDA CARİ VƏZİYYƏT")
+                        .setDefaults(Notification.DEFAULT_SOUND)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText("Aktiv xəstə sayı: "+covidList.get(covidList.size()-1).Active+"\nÖlüm halı: "+covidList.get(covidList.size()-1).Deaths))
+                        .setContentText("")
+                        .setContentInfo("Info");
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                notificationManager.notify(200, notificationBuilder.build());
+            }
+        }).start();
     }
 }

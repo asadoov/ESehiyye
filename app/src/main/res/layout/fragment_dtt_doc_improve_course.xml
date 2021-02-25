@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.Dtt.DttDocImproveCourseFragment">
+
     <TextView
         android:id="@+id/notFoundLabel"
         android:layout_width="match_parent"
@@ -12,25 +13,38 @@
         android:text="Bura hələki boşdur :("
         android:textSize="20dp"
         android:visibility="gone" />
-    <ListView
-        android:id="@+id/dttDocImproveList"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <RelativeLayout
-        android:padding="16dp"
-        android:gravity="bottom|right"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:visibility="gone"
-            android:id="@+id/saveButton"
-            android:padding="15dp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/blue_gradient"
-            android:text="Əlavə et (1)"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content">
+
+        <SearchView
+            android:id="@+id/eventSearch"
+            android:queryHint="Kursun adını daxil edin..."
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ListView
+            android:id="@+id/dttDocImproveList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|right"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_gradient"
+                android:padding="15dp"
+                android:text="Əlavə et (1)"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+        </RelativeLayout>
 
 </FrameLayout>

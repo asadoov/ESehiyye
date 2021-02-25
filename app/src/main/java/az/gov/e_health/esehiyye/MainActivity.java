@@ -1,8 +1,5 @@
 package az.gov.e_health.esehiyye;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import az.gov.e_health.esehiyye.ui.main.AppFragment;
 
@@ -37,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         //  am.cancel(contentIntent);
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + INTERVAL_DAY , INTERVAL_DAY * 3, contentIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + INTERVAL_DAY/2 , INTERVAL_DAY, contentIntent);
+
         //am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis() + 5000,contentIntent);
 //am.setExact(AlarmManager.RTC_WAKEUP,System.currentTimeMillis() + 5000,contentIntent);
         //Toast.makeText(this, "Rem set!", Toast.LENGTH_SHORT).show();
+
         AppRater.app_launched(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

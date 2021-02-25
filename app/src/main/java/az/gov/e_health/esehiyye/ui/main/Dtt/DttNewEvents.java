@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -52,6 +55,7 @@ public class DttNewEvents extends Fragment {
     List<UserStruct> usrList;
     ListView dttNewEventsListView;
     List<String> selectedEventsId = new ArrayList<>();
+    TextView notFoundLabel;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -109,7 +113,7 @@ public class DttNewEvents extends Fragment {
             }
         });
         dttNewEventsListView = view.findViewById(R.id.dttNewEventList);
-
+        notFoundLabel = view.findViewById(R.id.notFoundLabel);
         final Thread newsThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -241,7 +245,7 @@ public class DttNewEvents extends Fragment {
                                                     }
                                                 });
 
-                                    } else  {
+                                    } else {
 
                                         alertDialog.setTitle("Texniki xəta");
                                         alertDialog.setMessage("Biraz sonra yenidən cəht edin");
@@ -269,6 +273,112 @@ public class DttNewEvents extends Fragment {
                 //  Toast.makeText(getContext(), eventsId, Toast.LENGTH_SHORT).show();
             }
         });
+        final SearchView searchView = view.findViewById(R.id.eventSearch);
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+
+                    // Override onQueryTextSubmit method
+                    // which is call
+                    // when submitquery is searched
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+
+                    // This method is overridden to filter
+                    // the adapter according to a search query
+                    // when the user is typing search
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+
+                        final List<DttNewEventStruct> temp = new ArrayList<>();
+
+                        temp.clear();
+                        for (DttNewEventStruct item : dttNewEventsList) {
+                            if (item.KURS_AD.toLowerCase().contains(newText.toLowerCase())) {
+                                temp.add(item);
+
+                            }
+
+
+                        }
+                        if (temp != null) {
+                            if (temp.size() > 0) {
+                                new Handler(Looper.getMainLooper()).post(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dttNewEventsListView.setVisibility(View.VISIBLE);
+                                                notFoundLabel.setVisibility(View.GONE);
+                                                //  Log.d("UI thread", "I am the UI thread");
+                                            }
+                                        });
+                                if (temp != null) {
+                                    if (temp.size() > 0) {
+                                        adapter = new DttNewEventsAdapter(getContext(), temp);
+                                        dttNewEventsListView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+
+
+                                        dttNewEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> adapterView, View item, int position, long l) {
+
+                                                CheckBox newEventCheckBox = item.findViewById(R.id.newEventCheckBox);
+                                                Button saveButton = (Button) view.findViewById(R.id.saveButton);
+                                                if (temp.get(position).isChecked == true) {
+                                                    temp.get(position).isChecked = false;
+
+                                                    newEventCheckBox.setChecked(false);
+                                                    temp.remove(String.valueOf(temp.get(position).ID));
+
+                                                } else {
+                                                    temp.get(position).isChecked = true;
+                                                    newEventCheckBox.setChecked(true);
+                                                    selectedEventsId.add(String.valueOf(temp.get(position).ID));
+
+                                                }
+                                                if (selectedEventsId.size() > 0) {
+                                                    saveButton.setVisibility(View.VISIBLE);
+                                                    saveButton.setText(String.format("Əlavə et (%s)", selectedEventsId.size()));
+
+                                                } else {
+                                                    saveButton.setVisibility(View.GONE);
+                                                }
+
+                                                //dttNewEventsListView.setAdapter(adapter);
+                                                //adapter.notifyDataSetChanged();
+                                            }
+                                        });
+
+                                    }
+
+
+                                }
+
+
+                            } else {
+
+
+                                new Handler(Looper.getMainLooper()).post(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dttNewEventsListView.setVisibility(View.GONE);
+                                                notFoundLabel.setVisibility(View.VISIBLE);
+                                                //  Log.d("UI thread", "I am the UI thread");
+                                            }
+                                        });
+                            }
+                        }
+
+
+                        return true;
+                    }
+                });
         return view;
     }
 }

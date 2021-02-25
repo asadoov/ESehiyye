@@ -51,15 +51,15 @@ public class AppFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 
-        isFirstRun = prefs.getBoolean("1.2.1", true);
+        isFirstRun = prefs.getBoolean("1.2.5", true);
         if (isFirstRun) {
             showUpdateInfo();
         }
         isFirstRun = false;
 
-        prefs.edit().putBoolean("1.2.1", isFirstRun).commit();
+        prefs.edit().putBoolean("1.2.5", isFirstRun).commit();
 
-        prefs.edit().remove("1.2").commit();
+        prefs.edit().remove("1.2.4").commit();
 
 
         final View view = inflater.inflate(R.layout.fragment_app, container, false);
@@ -106,8 +106,8 @@ public class AppFragment extends Fragment {
                                 break;
 
                             case R.id.news:
-                                String jsonUserData = sharedPreferences.getString("userData", "");
-                                if (jsonUserData != "") {
+
+                                if (sharedPreferences.getString("userData", "") != "") {
                                     NewsFragment newsFragment = new NewsFragment();
                                     fragmentTransaction.replace(R.id.appContainer, newsFragment);
                                     fragmentTransaction.addToBackStack(null);
@@ -120,6 +120,7 @@ public class AppFragment extends Fragment {
                                 //immunityFragment .setArguments(args);
 
                                 break;
+
 
                             case R.id.profile:
                                 ServicesFragment servicesFragment = new ServicesFragment();
@@ -137,6 +138,14 @@ public class AppFragment extends Fragment {
                                 //immunityFragment .setArguments(args);
 
                                 break;
+
+//                            case R.id.notifications:
+////                                FeedbackFragment feedBackFragment = new FeedbackFragment();
+////                                fragmentTransaction.replace(R.id.appContainer, feedBackFragment);
+////                                fragmentTransaction.addToBackStack(null);
+////                                //immunityFragment .setArguments(args);
+//
+//                                break;
 
                         }
 
@@ -160,7 +169,7 @@ public class AppFragment extends Fragment {
                     }
                 });
         alertDialog.setTitle("Yeniliklər");
-        alertDialog.setMessage("Versiya: 1.2.1\n*Alqoritmlərin təkminləşdirilməsi\n* Həkimlər üçün \"Davamlı Tibbi Təhsil\" bölümü yaradıldı!");
+        alertDialog.setMessage("Versiya: 1.2.5\n* Umumi yaxşılaşdırmalar");
         alertDialog.show();
     }
 

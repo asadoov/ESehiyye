@@ -51,7 +51,7 @@ public class DTTFragment extends Fragment {
         adapter = new DttAdapter(getContext(), dttList);
         registerForContextMenu(dttListView);
         TextView toolbarTitle = getActivity().findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("Fərdi inkişaş planı");
+        toolbarTitle.setText("Fərdi inkişaf planı");
         final ImageButton backButton = getActivity().findViewById(R.id.backBtn);
         backButton.setVisibility(View.VISIBLE);
         backButton.setOnClickListener(new View.OnClickListener() {
