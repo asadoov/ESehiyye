@@ -5,6 +5,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +19,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.egov.loginwith.LoginResult;
+import com.egov.loginwith.LoginWithEgov;
+import com.egov.loginwith.enums.ButtonColors;
+import com.egov.loginwith.enums.URLEnvironment;
 
 import az.gov.e_health.esehiyye.Model.Database.DbSelect;
 import az.gov.e_health.esehiyye.Model.UserStruct;
@@ -25,6 +34,9 @@ import az.gov.e_health.esehiyye.R;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+
+
+
 
 public class LoginFragment extends Fragment {
 
@@ -46,6 +58,24 @@ public class LoginFragment extends Fragment {
         final EditText pass = view.findViewById(R.id.password);
         final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
+
+
+
+        LoginWithEgov loginWithEgov = view.findViewById(R.id.egovLoginButton);
+
+       // loginWithEgov.setButtonColor(ButtonColors.GREEN);
+        loginWithEgov.setPackagenamekey(getActivity().getPackageName());
+        loginWithEgov.setOnLoginButtonClick(new LoginResult() { @Override
+        public void sendResult(String token) {
+            //your logic here
+            System.out.println("THIS IS RESPONSE??????--->  "+token);
+            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Token", token);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getActivity(), "Token is copied!",
+                    Toast.LENGTH_LONG).show();
+        } });
+        loginWithEgov.setConfiguration(URLEnvironment.PRODUCTION);//URLEnvironment.PRODUCTIO N
         if (sharedPreferences.getString("userData", "") != "") {
 
             AppFragment fragment2 = new AppFragment();
@@ -66,30 +96,30 @@ public class LoginFragment extends Fragment {
                 signIn(email.getText().toString(), pass.getText().toString(), view);
             }
         });
-        view.findViewById(R.id.signUpclick).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SignUpFragment fragment2 = new SignUpFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment2);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-        view.findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                PasswordRecoveryFragment fragment2 = new PasswordRecoveryFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment2);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+//        view.findViewById(R.id.signUpclick).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SignUpFragment fragment2 = new SignUpFragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment2);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//        view.findViewById(R.id.forgotPassword).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PasswordRecoveryFragment fragment2 = new PasswordRecoveryFragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment2);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
         view.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

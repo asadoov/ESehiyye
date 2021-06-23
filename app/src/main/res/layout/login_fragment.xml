@@ -121,31 +121,35 @@
                     android:background="@drawable/gradient"
                     android:text="Daxil ol"
                     android:textColor="@android:color/white" />
-
+                <com.egov.loginwith.LoginWithEgov
+                    android:id="@+id/egovLoginButton" android:layout_width="match_parent" android:layout_height="wrap_content" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right">
 
-                    <Button
+<!--                    <Button-->
 
-                        android:id="@+id/forgotPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@android:color/transparent"
-                        android:text="Şifrəni unutdum"
-                        android:textColor="#18C4C8" />
+<!--                        android:id="@+id/forgotPassword"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:text="Şifrəni unutdum"-->
+<!--                        android:textColor="#18C4C8" />-->
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/signUpclick"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/gradient"
-                    android:text="Qeydiyyat"
-                    android:textColor="@android:color/white" />
+<!--                <Button-->
+<!--                    android:id="@+id/signUpclick"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:background="@drawable/gradient"-->
+<!--                    android:text="Qeydiyyat"-->
+<!--                    android:textColor="@android:color/white" />-->
+
+
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
