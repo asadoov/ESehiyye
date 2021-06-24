@@ -51,15 +51,15 @@ public class AppFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 
-        isFirstRun = prefs.getBoolean("1.2.5", true);
+        isFirstRun = prefs.getBoolean("1.2.6", true);
         if (isFirstRun) {
             showUpdateInfo();
         }
         isFirstRun = false;
 
-        prefs.edit().putBoolean("1.2.5", isFirstRun).commit();
+        prefs.edit().putBoolean("1.2.6", isFirstRun).commit();
 
-        prefs.edit().remove("1.2.4").commit();
+        prefs.edit().remove("1.2.5").commit();
 
 
         final View view = inflater.inflate(R.layout.fragment_app, container, false);
@@ -169,7 +169,7 @@ public class AppFragment extends Fragment {
                     }
                 });
         alertDialog.setTitle("Yeniliklər");
-        alertDialog.setMessage("Versiya: 1.2.5\n* Umumi yaxşılaşdırmalar");
+        alertDialog.setMessage("Versiya: 1.2.6\n* ASAN login imkanı əlavə olundu\n* Umumi yaxşılaşdırmalar");
         alertDialog.show();
     }
 

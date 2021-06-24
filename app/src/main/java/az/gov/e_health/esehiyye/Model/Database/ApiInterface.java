@@ -152,8 +152,8 @@ public interface ApiInterface {
     Call<List<XbtStruct>> GetXbtList(@Query("cypher1") String cypher1, @Query("cypher2") String cypher2, @Query("id") long id);
     @GET("/live/country/Azerbaijan")
     Call<List<CovidStruct>> GetCovidLive();
-    @GET("/login/asanlogin")
-    Call<List<CovidStruct>> loginWithEgov(@Query("jwt") String token);
+    @GET("/iosmobileapplication/user/asanlogin")
+    Call<List<CypherStruct>> loginWithEgov(@Query("jwt") String token);
 
 }
 

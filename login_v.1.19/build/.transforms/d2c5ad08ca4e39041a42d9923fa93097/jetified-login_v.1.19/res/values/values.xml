@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="button_color_blue">#0757bc</color>
+    <color name="button_color_green">#2F9A29</color>
+    <color name="button_color_red">#B22222</color>
+    <color name="color1">#cd4dcc</color>
+    <color name="color10">#000000</color>
+    <color name="color2">#111d5e</color>
+    <color name="color3">#b21f66</color>
+    <color name="color4">#ffbd69</color>
+    <color name="color5">#6c5b7b</color>
+    <color name="color6">#46b5d1</color>
+    <color name="color7">#0c9463</color>
+    <color name="color8">#004445</color>
+    <color name="color9">#ea5e5e</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="own_gray">#999494</color>
+    <string name="accept">Qəbul</string>
+    <string name="account_type">com.egov.loginwith</string>
+    <string name="app_info_message">tətbiqi sizin e-gov istifadəçi səlahiyyətlərinizdən istifadə edəcək</string>
+    <string name="app_name">LoginWithEgov</string>
+    <string name="cancel">İmtina</string>
+    <string name="continue_to">Davam et</string>
+    <string name="continue_with_egov">eGov ilə davam edin</string>
+    <string name="do_you_want_to_continue">Davam etmək istəyirsinizmi?</string>
+    <string name="error_occured">Xəta baş verdi</string>
+    <string name="info_text">Əgər Qəbul düyməsini klikləsəniz, tətbiq sizin e-gov istifadəçi səlahiyyətlərinizi istifadə edərək daxil oalcaq. İmtina düyməsinə klik etsəniz proses dayandırılacaq</string>
+    <string name="login_failed">Login failed</string>
+    <string name="login_with_egov">Login with e-gov</string>
+    <string name="login_withegov">eGov ilə daxil olun</string>
+    <string name="my_custom_account_gov">ASAN Login</string>
+    <string name="please_set_base_url_and_methodname">Please set base URL and api method path/name</string>
+    <string name="security_alert">Təhlükəsizlik üçün</string>
+    <string name="your_profile_data">Sizin e-gov istifadəçi məlumatlarınızı bu tətbiq istifadə edə biləcək</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+</resources>

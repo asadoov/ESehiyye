@@ -1,37 +1,29 @@
 package az.gov.e_health.esehiyye.ui.main;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.ProgressDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.egov.loginwith.LoginResult;
 import com.egov.loginwith.LoginWithEgov;
-import com.egov.loginwith.enums.ButtonColors;
 import com.egov.loginwith.enums.URLEnvironment;
+
+import java.util.List;
 
 import az.gov.e_health.esehiyye.Model.Database.DbSelect;
 import az.gov.e_health.esehiyye.Model.UserStruct;
-
 import az.gov.e_health.esehiyye.R;
-
-import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -68,12 +60,13 @@ public class LoginFragment extends Fragment {
         loginWithEgov.setOnLoginButtonClick(new LoginResult() { @Override
         public void sendResult(String token) {
             //your logic here
-            System.out.println("THIS IS RESPONSE??????--->  "+token);
-            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Token", token);
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(getActivity(), "Token is copied!",
-                    Toast.LENGTH_LONG).show();
+//            System.out.println("THIS IS RESPONSE??????--->  "+token);
+//            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+//            ClipData clip = ClipData.newPlainText("Token", token);
+//            clipboard.setPrimaryClip(clip);
+//            Toast.makeText(getActivity(), "Token is copied!",
+//                    Toast.LENGTH_LONG).show();
+            signInWithAsan(token,view);
         } });
         loginWithEgov.setConfiguration(URLEnvironment.PRODUCTION);//URLEnvironment.PRODUCTIO N
         if (sharedPreferences.getString("userData", "") != "") {
@@ -149,6 +142,55 @@ public class LoginFragment extends Fragment {
             @Override
             public void run() {
                 final List<UserStruct> userList = select.signIn(email, pass, view);
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        mWaitingDialog.dismiss();
+                        if (userList.size() > 0 && userList.get(0).ID != null) {
+                            AppFragment fragment2 = new AppFragment();
+                            FragmentManager fragmentManager = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container, fragment2);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+
+        signInCall.start();
+//try {
+//
+//    signInCall.join();
+//}
+//catch (Exception ex){
+//    ex.printStackTrace();
+//}
+
+
+    }
+    public void signInWithAsan(final String asanToken, final View view) {
+
+
+// when you start loading the data
+
+
+// when data have been loaded
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                mWaitingDialog = ProgressDialog.show(getContext(), "", "Yüklənir. Gözləyin...", true);
+            }
+        });
+        final EditText emailEdit = view.findViewById(R.id.email);
+        final EditText passEdit = view.findViewById(R.id.password);
+        Thread signInCall = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final List<UserStruct> userList = select.AsanLogin(asanToken, view);
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         mWaitingDialog.dismiss();

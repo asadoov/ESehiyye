@@ -123,6 +123,164 @@ public class DbSelect {
         return cypherList;
     }
 
+    public List<CypherStruct> AsanLoginGetCypher(String asanToken, final View view) {
+        List<CypherStruct> cypherList = new ArrayList<CypherStruct>();
+
+        final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                MODE_PRIVATE);
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                .build();
+        final ApiInterface api = retrofit.create(ApiInterface.class);
+
+        Call<List<CypherStruct>> call = api.loginWithEgov(asanToken);
+
+        //then finallly we are making the call using enqueue()
+        //it takes callback interface as an argument
+        //and callback is having two methods onRespnose() and onFailure
+        //if the request is successfull we will get the correct response and onResponse will be executed
+        //if there is some error we will get inside the onFailure() method
+        try {
+            Response<List<CypherStruct>> response = call.execute();
+
+            if (response.code() == 200) {
+                cypherList = response.body();
+                if (!cypherList.get(0).cypher1.isEmpty()) {
+
+
+                    final SharedPreferences.Editor myEdit
+                            = sharedPreferences.edit();
+
+                    myEdit.putString(
+                            "cypher1",
+                            cypherList.get(0).cypher1);
+
+                    myEdit.putString(
+                            "cypher2",
+                            cypherList.get(0).cypher2);
+
+                    myEdit.commit();
+                    // Toast.makeText(view.getContext(), cypherList.get(0).cypher1, Toast.LENGTH_SHORT).show();
+                } else {
+                    final TextView notFoundLabel = view.findViewById(R.id.notFoundLabel);
+                    new Handler(Looper.getMainLooper()).post(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+//                                    notFoundLabel.setText("Serverlərimizdə xəta baş verdi, biraz sonra yenidən təkrar edin :(");
+//                                    notFoundLabel.setVisibility(View.VISIBLE);
+
+                                    Log.d("UI thread", "I am the UI thread");
+                                }
+                            });
+                }
+
+            } else {
+                ShowServerExceptionAlert(view);
+
+            }
+
+
+        } catch (Exception ex) {
+            ShowInternetExceptionAlert(view);
+            ex.printStackTrace();
+        }
+        // Toast.makeText(view.getContext(), cypherList.get(0).cypher1, Toast.LENGTH_SHORT).show();
+
+        return cypherList;
+    }
+
+    public List<UserStruct> AsanLogin(String asanToken, final View view) {
+
+        List<CypherStruct> cypherList = AsanLoginGetCypher(asanToken, view);
+        List<UserStruct> userList = new ArrayList<UserStruct>();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            //now we can do whatever we want with this list
+            if (cypherList.size() > 0 && !cypherList.get(0).cypher1.isEmpty() && !cypherList.get(0).cypher2.isEmpty()) {
+
+
+                Call<List<UserStruct>> getUserData = api.getUserData(cypherList.get(0).cypher1, cypherList.get(0).cypher2);
+                Response<List<UserStruct>> response = getUserData.execute();
+
+
+                userList = response.body();
+
+                switch (response.code()) {
+
+                    case 200:
+                        //In this point we got our hero list
+                        //thats damn easy right ;)
+                        if (userList.size() > 0 && userList.get(0).ID != null) {
+
+                            final SharedPreferences.Editor myEdit
+                                    = sharedPreferences.edit();
+                            //Serializing UserData
+                            Gson gson = new Gson();
+                            String jsonUserData = gson.toJson(userList);
+                            //Put to SharedPreference
+                            myEdit.putString(
+                                    "userData",
+                                    jsonUserData);
+                            myEdit.commit();
+                            //now we can do whatever we want with this list
+
+                            //Toast.makeText(getContext(), userList.get(0).NAME, Toast.LENGTH_SHORT).show();
+                            if (userList.size() == 0) {
+                                new Handler(Looper.getMainLooper()).post(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+//                                                emailEdit.setError("*Zəhmət olmasa Emailınızın düzgünlüyünü yoxlayın");
+//                                                passEdit.setError("*Zəhmət olmasa şifrəninzin düzgünlüyünü yoxlayın");
+                                                Log.d("UI thread", "I am the UI thread");
+                                            }
+                                        });
+
+
+                            }
+                        } else {
+                            userList.clear();
+                            ShowServerExceptionAlert(view);
+                        }
+
+                        break;
+                    default:
+                        ShowServerExceptionAlert(view);
+                        break;
+
+
+                }
+
+
+            }
+
+
+        } catch (Exception ex) {
+            ShowInternetExceptionAlert(view);
+
+
+        }
+
+        return userList;
+    }
     public void refreshCypher(String cypher1, String cypher2, final View view) {
         List<CypherStruct> cypherList = new ArrayList<CypherStruct>();
 
@@ -1155,4 +1313,6 @@ public class DbSelect {
 
 
     }
+
+
 }
