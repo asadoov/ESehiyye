@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ import az.gov.e_health.esehiyye.Model.DrugsStruct;
 import az.gov.e_health.esehiyye.Model.FileStruct;
 import az.gov.e_health.esehiyye.Model.Institutions.InstStruct;
 import az.gov.e_health.esehiyye.Model.Institutions.InstTypeStruct;
+import az.gov.e_health.esehiyye.Model.NewRecipeStruct;
 import az.gov.e_health.esehiyye.Model.NewsStruct;
+import az.gov.e_health.esehiyye.Model.RecipeDrugsStruct;
 import az.gov.e_health.esehiyye.Model.RecipeStruct;
 import az.gov.e_health.esehiyye.Model.UserStruct;
 import az.gov.e_health.esehiyye.Model.XbtStruct;
@@ -462,7 +465,7 @@ public class DbSelect {
 
                         final AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
                         alertDialog.setTitle("Sessiyanız başa çatıb");
-                        alertDialog.setMessage("Digər qurğudan sizin akaunta giriş olunub");
+                        alertDialog.setMessage("Digər cihazdan hesabınıza giriş olunub");
                         alertDialog.setCancelable(false);
                         alertDialog.setCanceledOnTouchOutside(false);
                         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
@@ -1314,5 +1317,157 @@ public class DbSelect {
 
     }
 
+    public NewRecipeStruct GetNewRecipes(final View view) {
+        NewRecipeStruct obj = new NewRecipeStruct();
 
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+            String cypher1 = sharedPreferences.getString("cypher1", null);
+            String cypher2 = sharedPreferences.getString("cypher2", null);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<NewRecipeStruct> getNewRecipes = api.getNewRecipes(cypher1, cypher2);
+            Response<NewRecipeStruct> response = getNewRecipes.execute();
+            obj = response.body();
+
+            final ListView recipeListLayout = view.findViewById(R.id.recipeList);
+            final TextView notFoundLabel = view.findViewById(R.id.notFoundLabel);
+            switch (response.code()) {
+
+                case 200:
+                    refreshCypher(cypher1, cypher2, view);
+                    if (obj.GetRecipeListResult.IsSuccessfullyExecuted == true) {
+                        final NewRecipeStruct finalObj = obj;
+                        new Handler(Looper.getMainLooper()).post(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (finalObj.GetRecipeListResult.TotalCount==0) {
+                                            recipeListLayout.setVisibility(View.GONE);
+
+                                            notFoundLabel.setVisibility(View.VISIBLE);
+                                            //  Log.d("UI thread", "I am the UI thread");
+                                        }
+                                    }
+                                });
+                    }
+
+                    break;
+                default:
+                    new Handler(Looper.getMainLooper()).post(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+
+
+                                    recipeListLayout.setVisibility(View.GONE);
+                                    notFoundLabel.setText("Serverlərimizdə xəta baş verdi, biraz sonra yenidən təkrar edin :(");
+                                    notFoundLabel.setVisibility(View.VISIBLE);
+                                    //  Log.d("UI thread", "I am the UI thread");
+                                }
+                            });
+                    ShowServerExceptionAlert(view);
+                    break;
+
+
+            }
+            return obj;
+
+
+        } catch (Exception ex) {
+            ShowInternetExceptionAlert(view);
+            return obj;
+
+        }
+
+
+    }
+
+    public RecipeDrugsStruct GetDrugListbyRecipeId(int recipeId,final View view) {
+        RecipeDrugsStruct obj = new RecipeDrugsStruct();
+
+        try {
+
+
+            final SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("MySharedPref",
+                    MODE_PRIVATE);
+            String cypher1 = sharedPreferences.getString("cypher1", null);
+            String cypher2 = sharedPreferences.getString("cypher2", null);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiInterface.BASE_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+                    .build();
+
+            //creating the api interface
+            final ApiInterface api = retrofit.create(ApiInterface.class);
+
+
+            Call<RecipeDrugsStruct> getNewRecipes = api.GetDrugListbyRecipeId(cypher1, cypher2,recipeId);
+            Response<RecipeDrugsStruct> response = getNewRecipes.execute();
+            obj = response.body();
+
+            final ListView recipeListLayout = view.findViewById(R.id.recipeDrugList);
+            final TextView notFoundLabel = view.findViewById(R.id.notFoundLabel);
+            switch (response.code()) {
+
+                case 200:
+                    refreshCypher(cypher1, cypher2, view);
+//                    if (obj.IsSuccessfullyExecuted == true) {
+//                        final GetDrugListbyRecipeIdResult finalObj = obj;
+//                        new Handler(Looper.getMainLooper()).post(
+//                                new Runnable() {
+//                                    @Override
+//                                    public void run() {
+////                                        if (finalObj.TotalCount==0) {
+////                                            recipeListLayout.setVisibility(View.GONE);
+////
+////                                            notFoundLabel.setVisibility(View.VISIBLE);
+////                                            //  Log.d("UI thread", "I am the UI thread");
+////                                        }
+//                                    }
+//                                });
+//                    }
+
+                    break;
+                default:
+                    new Handler(Looper.getMainLooper()).post(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+
+
+//                                    recipeListLayout.setVisibility(View.GONE);
+//                                    notFoundLabel.setText("Serverlərimizdə xəta baş verdi, biraz sonra yenidən təkrar edin :(");
+//                                    notFoundLabel.setVisibility(View.VISIBLE);
+                                    //  Log.d("UI thread", "I am the UI thread");
+                                }
+                            });
+                    ShowServerExceptionAlert(view);
+                    break;
+
+
+            }
+            return obj;
+
+
+        } catch (Exception ex) {
+            ShowInternetExceptionAlert(view);
+            return obj;
+
+        }
+
+
+    }
 }

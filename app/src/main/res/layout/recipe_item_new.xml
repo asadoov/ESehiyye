@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:p1="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    >
+    <TextView
+
+        android:textSize="10pt"
+
+        android:id="@+id/recipePos"
+        android:layout_gravity="center"
+        android:text="1"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TextView
+            android:id="@+id/recipeNum"
+            android:textAllCaps="false"
+            android:textSize="10pt"
+            android:textColor="@android:color/holo_blue_light"
+            android:textStyle="bold"
+            android:text="Resept N"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:id="@+id/recipeDoctor"
+            android:text="Həkim:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textAllCaps="true"
+            android:id="@+id/recipeDate"
+            android:text="Yazilma tarixi:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textAllCaps="true"
+            android:id="@+id/recipeStatus"
+            android:text="Reseptin statusu: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

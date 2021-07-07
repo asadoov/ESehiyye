@@ -115,8 +115,6 @@ public class SelectType extends Fragment {
         for (InstTypeStruct item : typeList
         ) {
             instTypesString.add(item.Name);
-
-
         }
 
         instTypeLayout = view.findViewById(R.id.typeListLayout);

@@ -11,9 +11,12 @@ import az.gov.e_health.esehiyye.Model.DrugsStruct;
 import az.gov.e_health.esehiyye.Model.FeedbackStatusStruct;
 import az.gov.e_health.esehiyye.Model.FileStruct;
 import az.gov.e_health.esehiyye.Model.FileUploadStatusStruct;
+
 import az.gov.e_health.esehiyye.Model.Institutions.InstStruct;
 import az.gov.e_health.esehiyye.Model.Institutions.InstTypeStruct;
+import az.gov.e_health.esehiyye.Model.NewRecipeStruct;
 import az.gov.e_health.esehiyye.Model.NewsStruct;
+import az.gov.e_health.esehiyye.Model.RecipeDrugsStruct;
 import az.gov.e_health.esehiyye.Model.RecipeStruct;
 import az.gov.e_health.esehiyye.Model.StatusStruct;
 import az.gov.e_health.esehiyye.Model.UserStruct;
@@ -154,6 +157,10 @@ public interface ApiInterface {
     Call<List<CovidStruct>> GetCovidLive();
     @GET("/iosmobileapplication/user/asanlogin")
     Call<List<CypherStruct>> loginWithEgov(@Query("jwt") String token);
+    @GET("/api/rest/Patient.svc/GetRecipeList")
+    Call<NewRecipeStruct> getNewRecipes(@Query("accessToken") String accessToken, @Query("refreshToken") String refreshToken);
+    @GET("/api/rest/Patient.svc/GetDrugListbyRecipeId")
+    Call<RecipeDrugsStruct> GetDrugListbyRecipeId(@Query("accessToken") String accessToken, @Query("refreshToken") String refreshToken, @Query("recipeId") int recipeId);
 
 }
 

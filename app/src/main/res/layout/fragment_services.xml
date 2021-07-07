@@ -119,6 +119,37 @@
 
                         <LinearLayout
 
+                            android:id="@+id/myRecipes"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/edit_text_border"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/prescription" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:gravity="center"
+                                android:text="Reseptlərim"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+
                             android:id="@+id/institutions"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -165,7 +196,30 @@
                             android:textSize="12sp"
                             android:visibility="visible" />
                     </RelativeLayout>
+                    <LinearLayout
 
+                        android:id="@+id/drugs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/edit_text_border"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/drug" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="Dərman vasitələri haqqında məlumat"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -269,57 +323,34 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+<!--                    <LinearLayout-->
 
-                        android:id="@+id/myRecipes"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
+<!--                        android:id="@+id/myRecipes"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:background="@drawable/edit_text_border"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="10dp">-->
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/recipes_ico" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="50dp"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:src="@drawable/recipes_ico" />-->
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:gravity="center"
-                            android:text="Reseptlərim"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="Reseptlərim"-->
+<!--                            android:textStyle="bold" />-->
 
 
-
-                    <LinearLayout
-
-                        android:id="@+id/drugs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/edit_text_border"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/drug" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:gravity="center"
-                            android:text="Dərman vasitələri haqqında məlumat"
-                            android:textStyle="bold" />
+<!--                    </LinearLayout>-->
 
 
-                    </LinearLayout>
+
+
 
 
 

@@ -22,6 +22,7 @@ import az.gov.e_health.esehiyye.Model.UserStruct;
 import az.gov.e_health.esehiyye.R;
 import az.gov.e_health.esehiyye.ui.main.Dtt.DttYearsFragment;
 import az.gov.e_health.esehiyye.ui.main.Institutions.SelectRegion;
+import az.gov.e_health.esehiyye.ui.main.NewRecipe.NewRecipesFragment;
 import az.gov.e_health.esehiyye.ui.main.XBT.Xbt_main;
 
 import com.google.gson.Gson;
@@ -101,12 +102,13 @@ public class ServicesFragment extends Fragment {
                 }
             }
         });
+
         view.findViewById(R.id.myRecipes).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String jsonUserData = sharedPreferences.getString("userData", "");
                 if (jsonUserData != "") {
-                    Recipes mDocCats = new Recipes();
+                    NewRecipesFragment mDocCats = new NewRecipesFragment();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.container, mDocCats);
                     fragmentTransaction.addToBackStack(null);
@@ -122,6 +124,29 @@ public class ServicesFragment extends Fragment {
                 }
             }
         });
+
+        //OLD
+//        view.findViewById(R.id.myRecipes).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String jsonUserData = sharedPreferences.getString("userData", "");
+//                if (jsonUserData != "") {
+//                    Recipes mDocCats = new Recipes();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.container, mDocCats);
+//                    fragmentTransaction.addToBackStack(null);
+//                    //mDocCats .setArguments(args);
+//                    fragmentTransaction.commit();
+//                } else {
+//                    LoginFragment loginFragment = new LoginFragment();
+//
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.appContainer, loginFragment);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+//                }
+//            }
+//        });
         view.findViewById(R.id.xbt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
