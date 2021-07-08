@@ -97,7 +97,10 @@ android:layout_margin="5dp"
 
         </LinearLayout>
         <ListView
+
             android:id="@+id/recipeDrugList"
+            android:dividerHeight="5dp"
+            android:divider="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

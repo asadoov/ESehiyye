@@ -90,13 +90,14 @@ resId.setText("Resept №"+rId);
                         public void run() {
 
 
-
+int i = 0;
 
 
                             if (recipe.GetDrugListbyRecipeIdResult.IsSuccessfullyExecuted == true &&recipe.GetDrugListbyRecipeIdResult.Results.size() > 0) {
                                 for (NewRecipeStruct.Drug item : recipe.GetDrugListbyRecipeIdResult.Results
                                 ) {
-                                    drugList.add(item.drugName+" / "+item.drugRoute+" / "+item.drugQuantity+" "+item.drugDosage+" / "+item.drugScheduled+" / "+
+                                    i++;
+                                    drugList.add(i+". "+item.drugName+" / "+item.drugRoute+" / "+item.drugQuantity+" "+item.drugDosage+" / "+item.drugScheduled+" / "+
                                             item.drugDurationCount +" "+item.drugDuration+" / "+item.drugNote );
                                 }
                                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
